@@ -107,7 +107,7 @@ function  brings()
                 local altPlayer = game.Players:FindFirstChild(altName)
                 if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
                     local newPosition = startPosition + (tonumber(index) * offset)
-                    altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition, newPosition + startCFrame.LookVector)
+                    altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition, newPosition)
                 end
             end
         end
