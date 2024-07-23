@@ -1,3 +1,4 @@
+local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
 local player = Players.LocalPlayer
@@ -9,13 +10,12 @@ local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMes
 local drop = nil
 
 local ats = {
-    ["1"] = "yeyegsk75hack",
-    ["2"] = "isimsizzz1234566",
-    ["3"] = "SixterYeeter",
-    ["4"] = "ihavezerobraincells4",
-    ["5"] = "ihaterake123",
-    ["6"] = "JJBaBa0111",
-    ["7"] = "ObamaThePresident198",
+    ["1"] = "diamondgamer72",
+    ["2"] = "SixterYeeter",
+    ["3"] = "isimsizzz1234566",
+    ["4"] = "ravena_mexirica",
+    ["5"] = "ObamaThePresident198",
+    ["6"] = "CoolgAmer30328",
 }
 
 local codes = {
@@ -138,7 +138,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             autodrop(false)
         elseif message == "redeem codes" then
             redeemcodes()
-        elseif part1 = "msg" then
+        elseif part1 == "msg" then
             chat(splitMessage)
         end
     end
