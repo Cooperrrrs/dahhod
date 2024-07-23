@@ -10,12 +10,13 @@ local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMes
 local drop = nil
 
 local ats = {
-    ["1"] = "tonytheboy",
-    ["2"] = "mycoopis",
-    ["3"] = "DDDDD1217727",
-    ["4"] = "rafa4h2",
-    ["5"] = "c0i3xwlltnqbgabim5hh",
-    ["6"] = "xwnzpzss7m5scwh0v5id",
+    ["1"] = "yeyegsk75hack",
+    ["2"] = "ObamaThePresident198",
+    ["3"] = "isimsizzz1234566",
+    ["4"] = "SixterYeeter",
+    ["5"] = "ihavezerobraincells4",
+    ["6"] = "ihaterake123",
+    ["7"] = "JJBaBa0111",
 }
 
 local codes = {
@@ -46,7 +47,7 @@ function redeemcodes()
 
         game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
         chat("Redeeming code: "..code)
-        wait(5)
+        wait(10)
     end
         
 end
@@ -105,7 +106,6 @@ function  brings()
                  print("11")
                 local altPlayer = game.Players:FindFirstChild(altName)
                 if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    print("Bringing"..altplayer.Name)
                     local newPosition = startPosition + (tonumber(index) * offset)
                     altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition)
                 end
@@ -139,9 +139,14 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 end)
 
 
+player.CharacterAdded:Connect(function(character)
+    brings()
+end)
+
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
 local TextLabel = Instance.new("TextLabel")
+ScreenGui.ResetOnSpawn = false
 
 --Properties:
 
@@ -167,5 +172,3 @@ TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextScaled = true
 TextLabel.TextSize = 14.000
 TextLabel.TextWrapped = true
-
-
