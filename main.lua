@@ -117,6 +117,11 @@ end
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
     local speaker, message = players[messageData.FromSpeaker], messageData.Message
     if speaker == host then
+        local parts = string.split(message, " ")
+        local part1 = parts[1]
+        local splitMessage = parts[2]
+        print(splitMessage)  -- Output: hello
+
         print("Found host")
         if message == "bring" then
             brings()
@@ -133,6 +138,8 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             autodrop(false)
         elseif message == "redeem codes" then
             redeemcodes()
+        elseif part1 = "msg" then
+            chat(splitMessage)
         end
     end
 end)
