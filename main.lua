@@ -16,6 +16,7 @@ local ats = {
     ["4"] = "ihavezerobraincells4",
     ["5"] = "ihaterake123",
     ["6"] = "JJBaBa0111",
+    ["7"] = "ObamaThePresident198",
 }
 
 local codes = {
