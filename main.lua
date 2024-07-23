@@ -15,7 +15,7 @@ local ats = {
     ["3"] = "DDDDD1217727",
     ["4"] = "rafa4h2",
     ["5"] = "c0i3xwlltnqbgabim5hh",
-    ["6"] = "xwnzpzss7m5scwh0v5id,
+    ["6"] = "xwnzpzss7m5scwh0v5id",
 }
 
 local codes = {
