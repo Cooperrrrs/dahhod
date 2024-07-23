@@ -13,9 +13,9 @@ local ats = {
     ["1"] = "tonytheboy",
     ["2"] = "mycoopis",
     ["3"] = "DDDDD1217727",
-    ["4"] = "CoolgAmer30328",
-    ["5"] = "rafa4h2",
-    ["6"] = "c0i3xwlltnqbgabim5hh",
+    ["4"] = "rafa4h2",
+    ["5"] = "c0i3xwlltnqbgabim5hh",
+    ["6"] = "xwnzpzss7m5scwh0v5id,
 }
 
 local codes = {
@@ -46,7 +46,7 @@ function redeemcodes()
 
         game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
         chat("Redeeming code: "..code)
-        wait(10)
+        wait(5)
     end
         
 end
