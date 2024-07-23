@@ -12,6 +12,10 @@ local drop = nil
 local ats = {
     ["1"] = "tonytheboy",
     ["2"] = "mycoopis",
+    ["3"] = "DDDDD1217727",
+    ["4"] = "CoolgAmer30328",
+    ["5"] = "rafa4h2",
+    ["6"] = "c0i3xwlltnqbgabim5hh",
 }
 
 local codes = {
