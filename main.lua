@@ -1,4 +1,3 @@
-local Players = game:GetService('Players')
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
 local player = Players.LocalPlayer
