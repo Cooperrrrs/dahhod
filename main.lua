@@ -25,6 +25,13 @@ local codes = {
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
 
+
+
+function chat(msg) 
+    ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
+    print(msg)
+end
+
 function redeemcodes()
 
     for _, code in pairs(codes) do
@@ -34,6 +41,7 @@ function redeemcodes()
             }
 
         game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+        chat("Redeeming code: "..code)
         wait(10)
     end
         
@@ -46,7 +54,7 @@ function dropmoney(amount)
         }
 
         game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-
+        chat("Dropping: "..amount)
 end
 
 
@@ -55,6 +63,7 @@ function autodrop(bool)
         -- Start dropping money
         drop = task.spawn(function()
             while true do
+                
                 dropmoney(10000) -- Assuming dropmoney is a function that handles the drop
                 wait(10) -- Wait 10 seconds before dropping again
             end
@@ -69,11 +78,6 @@ function autodrop(bool)
 end
 
 
-
-function chat(msg) 
-    ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, 'All')
-    print(msg)
-end
 
 
 function pickupmoney()
@@ -92,14 +96,12 @@ function  brings()
     local offset = Vector3.new(0, 0, 7)
 
     for _, plr in pairs(playerfolder:GetChildren()) do
-        print("looking")
         if plr.Name == host.Name then
             for index, altName in pairs(ats) do
                 local altPlayer = game.Players:FindFirstChild(altName)
                 if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
                     local newPosition = startPosition + (tonumber(index) * offset)
                     altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition)
-                    print(altName .. " teleported to new position")
                 end
             end
         end
@@ -114,6 +116,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
         if message == "bring" then
             brings()
         elseif message == "drop true" then
+                chat("Started Droping")
                  local walletTool = player.Backpack:FindFirstChild("Wallet")
                     if walletTool then
                         player.Character.Humanoid:EquipTool(walletTool)
@@ -121,11 +124,42 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
                     end
             autodrop(true)
         elseif message == "drop false" then
+            chat("Stopped Droping")
             autodrop(false)
         elseif message == "redeem codes" then
             redeemcodes()
         end
     end
 end)
+
+
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.IgnoreGuiInset = true
+
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Frame.BorderSizePixel = 0
+Frame.Size = UDim2.new(1, 0, 1, 0)
+
+TextLabel.Parent = Frame
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextLabel.BorderSizePixel = 0
+TextLabel.Size = UDim2.new(1, 0, 1, 0)
+TextLabel.Font = Enum.Font.SourceSansBold
+TextLabel.Text = "Your on an alt"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
 
 
