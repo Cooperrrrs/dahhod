@@ -240,7 +240,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
         elseif message == "redeem codes" then
             redeemcodes()
         elseif part1 == "msg" then
-            local restOfMessage = string.sub(message, splitMessage + 1)
+            local restOfMessage = string.sub(message, splitMessage)
             chat(restOfMessage)
         elseif message == "bring small" then
             chat("Returning back to weareout!")
