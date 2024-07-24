@@ -162,6 +162,9 @@ function killnbring(target, acc)
 	local function startUpdating()
 		if not isUpdating then
 			isUpdating = true
+			if not updateConnection then
+				updateConnection = RunService.RenderStepped:Connect(updatePosition)
+			end
 		end
 	end
 
@@ -169,18 +172,18 @@ function killnbring(target, acc)
 	local function stopUpdating()
 		if isUpdating then
 			isUpdating = false
+			if updateConnection then
+				updateConnection:Disconnect()
+				updateConnection = nil
+			end
 		end
 	end
 
 	startUpdating()
 
-	local loop = task.spawn(function()
-		updatePosition()
-	end)
 	while true do
 		if isUpdating then 
 			if RTARGET.Character.Humanoid.Health <= 4 then
-				task.cancel(loop)
 				stopUpdating()
 				wait(1)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
