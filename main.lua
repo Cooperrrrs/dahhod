@@ -186,6 +186,13 @@ while true do
         game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
         
         player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
+        wait(0.3)
+        local args = {
+            [1] = "Grabbing",
+            [2] = false
+        }
+
+        game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
         break
     else
     print("clicking")
