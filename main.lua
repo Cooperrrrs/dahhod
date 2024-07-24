@@ -174,11 +174,11 @@ function killnbring(target, acc)
 
 	startUpdating()
 
-
+	local loop = task.spawn(updatePosition())
 	while true do
-		updatePosition()
 		if isUpdating then 
 			if RTARGET.Character.Humanoid.Health <= 4 then
+				task.cancel(loop)
 				stopUpdating()
 				wait(1)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
@@ -273,7 +273,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 				end
 			end
 			killnbring(targetname, botname)
-	
+
 		elseif part1 == "ss" then
 			chat("Returning back to weareout!")
 			for _,Player in pairs(Players:GetPlayers()) do
