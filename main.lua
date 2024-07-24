@@ -7,16 +7,13 @@ local players, replicatedStorage = game:GetService("Players"), game:GetService("
 local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
 local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMessageDoneFiltering");
 local VirtualUser = game:GetService("VirtualUser")
-local isUpdating = false  -- Toggle this flag to start or stop updating
+local isUpdating = false
 local updateConnection
 local RunService = game:GetService("RunService")
 local targetname = nil
 local botname = nil
-
 local drop = nil
-
 local ats = _G.alts
-
 local codes = _G.codes
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
@@ -29,7 +26,6 @@ function chat(msg)
 end
 
 function redeemcodes()
-
 	for _, code in pairs(codes) do
 		local args = {
 			[1] = "EnterPromoCode",
@@ -38,7 +34,7 @@ function redeemcodes()
 
 		game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 		chat("Redeeming code: "..code)
-		wait(10)
+		wait(5)
 	end
 
 end
@@ -56,19 +52,16 @@ end
 
 function autodrop(bool)
 	if bool then
-		-- Start dropping money
 		drop = task.spawn(function()
 			while true do
-
-				dropmoney(10000) -- Assuming dropmoney is a function that handles the drop
-				wait(10) -- Wait 10 seconds before dropping again
+				dropmoney(10000)
+				wait(10)
 			end
 		end)
 	else
-		-- Stop dropping money
 		if drop then
 			task.cancel(drop)
-			drop = nil -- Clear the drop reference
+			drop = nil
 		end
 	end
 end
@@ -88,10 +81,7 @@ end
 function  brings()
 	print("startinmg function")
 	local playerfolder =  workspace:WaitForChild("Players")
-	local startPosition = host.Character.HumanoidRootPart.Position
-	local startCFrame = host.Character.HumanoidRootPart.CFrame
-	local lookVector = startCFrame.LookVector
-	local offset = 3
+	
 	for _, plr in pairs(playerfolder:GetChildren()) do
 		if plr.Name == host.Name then
 			for index, altName in pairs(ats) do
@@ -106,10 +96,6 @@ end
 
 function  bringsmall()
 	local playerfolder =  workspace:WaitForChild("Players")
-	local startPosition = host.Character.HumanoidRootPart.Position
-	local startCFrame = host.Character.HumanoidRootPart.CFrame
-	local lookVector = startCFrame.LookVector
-	local offset = 3
 
 	for _, plr in pairs(playerfolder:GetChildren()) do
 		if plr.Name == host.Name then
@@ -127,11 +113,12 @@ end
 
 function killnbring(target, acc)
 	wait(2)
-	print(target, acc)
-	if acc ~= player.Name then  print("NOT VALID") return end
+	if acc ~= player.Name then return end
+	
 	chat("Hey ive come to get you please do not run!")
+	
 	local RTARGET = game.Players:WaitForChild(target)
-	print("TARGET IS CALLED: "..RTARGET.Name)
+
 	local function getPredictedPosition(target)
 		local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
 		if not targetHRP then return nil end
@@ -191,7 +178,7 @@ function killnbring(target, acc)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame * CFrame.new(0, 5, 0)
 				wait(0.4)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
-				wait(0.4)
+				wait(0.6)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -230,55 +217,55 @@ function tphost(target, acc)
 	chat("Hey ive come to get you please do not run!")
 	local RTARGET = game.Players:WaitForChild(target)
 	print("TARGET IS CALLED: "..RTARGET.Name)
-    local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+	local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
 	player.Character.Humanoid:EquipTool(cc)
 
 	-- Function to update position
 	local function updatePosition()
 		wait(0.001)
-	
+
 		if host and host.Character and host.Character:FindFirstChild("HumanoidRootPart") then
 			local playerHRP = player.Character.HumanoidRootPart
 			playerHRP.CFrame =  host.Character.HumanoidRootPart.CFrame
 		end
 	end
 
-    updatePosition()
+	updatePosition()
 
 
-    while true do
-        if host.Character.Humanoid.Health <= 4 then
-                        wait(1)
-                        player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame * CFrame.new(0, 5, 0)
-                        wait(0.4)
-                        player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
-                        print("OOGGAAA")
-                        wait(0.4)
-                        local args = {
-                            [1] = "Grabbing",
-                            [2] = false
-                        }
+	while true do
+		if host.Character.Humanoid.Health <= 4 then
+			wait(1)
+			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame * CFrame.new(0, 5, 0)
+			wait(0.4)
+			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
+			print("OOGGAAA")
+			wait(0.4)
+			local args = {
+				[1] = "Grabbing",
+				[2] = false
+			}
 
-                        game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+			game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
-                        player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-                        wait(0.3)
-                        local args = {
-                            [1] = "Grabbing",
-                            [2] = false
-                        }
+			player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+			wait(0.3)
+			local args = {
+				[1] = "Grabbing",
+				[2] = false
+			}
 
-                        game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-                        targetname = nil
-                        botname = nil
-                        break
-            else
-                        print("clicking")
-                        VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-                        wait(3)
-                        VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-            end
-    end
+			game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+			targetname = nil
+			botname = nil
+			break
+		else
+			print("clicking")
+			VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+			wait(3)
+			VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+		end
+	end
 end
 
 
