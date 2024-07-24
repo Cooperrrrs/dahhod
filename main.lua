@@ -144,6 +144,7 @@ end
 
 -- Function to update position
 local function updatePosition()
+    wait(0.001)
     if not isUpdating then return end  -- Only update if isUpdating is true
 
     if RTARGET and RTARGET.Character and RTARGET.Character:FindFirstChild("HumanoidRootPart") then
@@ -172,10 +173,10 @@ local function stopUpdating()
     end
 end
 
-startUpdating() 
 
 
     while true do
+        updatePosition()
         if isUpdating then 
                if RTARGET.Character.Humanoid.Health <= 4 then
                    stopUpdating()
