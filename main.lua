@@ -131,6 +131,7 @@ function killnbring(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
 	chat("Hey ive come to get you please do not run!")
 	local RTARGET = game.Players:WaitForChild(target)
+	print("TARGET IS CALLED: "..RTARGET.Name)
 	player.Character.Humanoid:EquipTool(cc)
 	local function getPredictedPosition(target)
 		local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
@@ -187,7 +188,7 @@ function killnbring(target, acc)
 				stopUpdating()
 				wait(1)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
-				wait(0.5)
+				wait(0.8)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
