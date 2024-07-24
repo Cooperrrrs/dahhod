@@ -274,7 +274,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             end
           end
             killnbring(targetname, botname)
-        elseif message == "ss" then
+        elseif part1 == "ss" then
             chat("Returning back to weareout!")
           for _,Player in pairs(Players:GetPlayers()) do
               if Player.Name:find(splitMessage) or  Player.DisplayName:find(splitMessage) then
