@@ -152,6 +152,7 @@ local function updatePosition()
         if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
             local playerHRP = player.Character.HumanoidRootPart
             playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0, 3, 0) -- Adjust the offset as needed
+            print(targetPredictedCFrame)
         end
     end
 end
