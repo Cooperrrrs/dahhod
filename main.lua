@@ -251,11 +251,13 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             local botname = nil
            for _,Player in pairs(Players:GetPlayers()) do
               if Player.Name:find(splitMessage) then
+                 print(Player.Name)
                  targetname = Player.Name
               end
           end
             for _,Player in pairs(Players:GetPlayers()) do
               if Player.Name:find(parts[3]) then
+                 print(Player.Name)
                  botname = Player.Name
               end
           end
