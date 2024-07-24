@@ -92,7 +92,8 @@ function  brings()
                 if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
                     local newPosition = startPosition + (tonumber(index) * offset)
                     print(newPosition)
-                    altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition) * CFrame.Angles(math.rad(-90),0,0)
+                    local offset = Vector3.new(0,0,5) -- in your case, Vector3.new(0,0,5), or something like that
+                    altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition)*CFrame.new(offset)
                 end
             end
         end
