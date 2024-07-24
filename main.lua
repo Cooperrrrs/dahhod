@@ -128,8 +128,8 @@ end
 
 function killnbring(target, acc)
 if acc ~= player.Name then return end
+chat("Hey ive come to get you please do not run!")
 local RTARGET = game.Players:WaitForChild(target)
-print(RTARGET.Name.." NAME IS")
 player.Character.Humanoid:EquipTool(cc)
 local function getPredictedPosition(target)
     local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
@@ -254,7 +254,6 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             chat("Returning back to weareout!")
             bringsmall()
         elseif part1 == "tp" then
-            chat("Hey ive come to get you please do not run!")
             for _, Player in pairs(Players:GetPlayers()) do
                 if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
                     print("Username: " .. Player.Name .. ", Display Name: " .. Player.DisplayName)
