@@ -261,7 +261,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             bringsmall()
         elseif part1 == "bring" then
             killnbring(splitMessage, parts[3])
-        elseif message == "STOP" then
+        elseif message == "ss" then
             stop(splitMessage)
         end
     end
