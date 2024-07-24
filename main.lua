@@ -212,6 +212,8 @@ end
 function stop(acc)
  if acc ~= player.Name then return end
     if isUpdating then
+            targetname = nil
+            botname = nil
             isUpdating = false
     end
  wait(0.2)
