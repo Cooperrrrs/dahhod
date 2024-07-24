@@ -91,7 +91,6 @@ function  brings()
     local startCFrame = host.Character.HumanoidRootPart.CFrame
     local lookVector = startCFrame.LookVector
     local offset = 3
-
     for _, plr in pairs(playerfolder:GetChildren()) do
         if plr.Name == host.Name then
             for index, altName in pairs(ats) do
@@ -127,6 +126,7 @@ end
 
 function killnbring(target)
 local RTARGET = game.Players:WaitForChild(target)
+player.Character.Humanoid:EquipTool(cc)
 local function getPredictedPosition(target)
     local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
     if not targetHRP then return nil end
@@ -175,9 +175,9 @@ while true do
 
     if RTARGET.Character.Humanoid.Health <= 4 then
        stopUpdating()
-       wait(0.1)
+       wait(0.3)
        player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
-       wait(0.1)
+       wait(0.3)
         local args = {
             [1] = "Grabbing",
             [2] = false
