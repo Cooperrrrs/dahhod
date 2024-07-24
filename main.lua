@@ -7,7 +7,6 @@ local players, replicatedStorage = game:GetService("Players"), game:GetService("
 local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
 local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMessageDoneFiltering");
 local VirtualUser = game:GetService("VirtualUser")
-local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
 local isUpdating = false  -- Toggle this flag to start or stop updating
 local updateConnection
 local RunService = game:GetService("RunService")
@@ -133,7 +132,6 @@ function killnbring(target, acc)
 	chat("Hey ive come to get you please do not run!")
 	local RTARGET = game.Players:WaitForChild(target)
 	print("TARGET IS CALLED: "..RTARGET.Name)
-	player.Character.Humanoid:EquipTool(cc)
 	local function getPredictedPosition(target)
 		local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
 		if not targetHRP then return nil end
@@ -165,6 +163,8 @@ function killnbring(target, acc)
 		if not isUpdating then
 			isUpdating = true
 			if not updateConnection then
+				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+				player.Character.Humanoid:EquipTool(cc)
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
 			end
 		end
