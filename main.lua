@@ -127,7 +127,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             redeemcodes()
         elseif part1 == "msg" then
             chat(splitMessage)
-        elseif message = "pick" then
+        elseif message == "pick" then
             pickupmoney()
         end
     end
