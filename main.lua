@@ -178,7 +178,7 @@ while true do
        stopUpdating()
        wait(1)
        player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
-       wait(0.3)
+       wait(0.5)
         local args = {
             [1] = "Grabbing",
             [2] = false
