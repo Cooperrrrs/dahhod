@@ -126,8 +126,8 @@ end
 
 function killnbring(target, acc)
 if acc ~= player.Name then return end
-isUpdating = true
 local RTARGET = game.Players:WaitForChild(target)
+print(RTARGET.Name.." NAME IS")
 player.Character.Humanoid:EquipTool(cc)
 local function getPredictedPosition(target)
     local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
