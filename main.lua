@@ -127,7 +127,8 @@ end
 
 
 function killnbring(target, acc)
-if acc ~= player.Name then return end
+print(acc, player.Name)
+if acc ~= player.Name then  print("NOT VALID") return end
 chat("Hey ive come to get you please do not run!")
 local RTARGET = game.Players:WaitForChild(target)
 player.Character.Humanoid:EquipTool(cc)
@@ -161,9 +162,6 @@ end
 local function startUpdating()
     if not isUpdating then
         isUpdating = true
-        if not updateConnection then
-            updateConnection = RunService.RenderStepped:Connect(updatePosition)
-        end
     end
 end
 
@@ -174,9 +172,10 @@ local function stopUpdating()
     end
 end
 
+startUpdating()
 
 
-    while true do
+while true do
         updatePosition()
         if isUpdating then 
                if RTARGET.Character.Humanoid.Health <= 4 then
