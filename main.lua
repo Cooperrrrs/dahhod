@@ -260,17 +260,39 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
         elseif message == "bring small" then
             bringsmall()
         elseif part1 == "bring" then
-            killnbring(splitMessage, parts[3])
+            local targetname = nil
+            local botname = nil
+           for _,Player in pairs(Players:GetPlayers()) do
+              if plr.Name:find(splitMessage) then
+                 targetname = plr.Name
+              end
+          end
+            for _,Player in pairs(Players:GetPlayers()) do
+              if plr.Name:find(parts[3]) then
+                 botname = plr.Name
+              end
+          end
+            killnbring(targetname, botname)
         elseif message == "ss" then
-            stop(splitMessage)
+          for _,Player in pairs(Players:GetPlayers()) do
+              if plr.Name:find(splitMessage) then
+                 stop(plr.Name)
+              end
+          end
         end
     end
 end)
 
 
-player.CharacterAdded:Connect(function(character)
-    brings()
+
+game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
+    print("died")
+    if isUpdating == true then
+        player.Character.Humanoid:EquipTool(cc)
+    else
+        brings()
 end)
+
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
