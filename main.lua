@@ -72,7 +72,7 @@ end
 function pickupmoney()
 	for _, money in pairs(workspace.Ignored.Drop:GetChildren()) do
 		if money.Name == "MoneyDrop" then
-			--fireclickdetector(money.ClickDetector, 10)
+			fireclickdetector(money.ClickDetector)
 		end
 	end
 end
