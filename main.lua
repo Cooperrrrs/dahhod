@@ -124,7 +124,8 @@ end
 
 
 
-function killnbring(target)
+function killnbring(target, acc)
+if acc ~= player.Name then return end
 local RTARGET = game.Players:WaitForChild(target)
 player.Character.Humanoid:EquipTool(cc)
 local function getPredictedPosition(target)
@@ -236,7 +237,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
         elseif message == "bring small" then
             bringsmall()
         elseif part1 == "bring" then
-            killnbring(splitMessage)
+            killnbring(splitMessage, parts[3])
         end
     end
 end)
