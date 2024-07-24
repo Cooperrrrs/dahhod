@@ -20,7 +20,7 @@ local ats = _G.alts
 
 local codes = _G.codes
 
-loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
+--loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
 
 
 
