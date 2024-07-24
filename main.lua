@@ -126,6 +126,7 @@ end
 
 function killnbring(target, acc)
 if acc ~= player.Name then return end
+isUpdating = true
 local RTARGET = game.Players:WaitForChild(target)
 player.Character.Humanoid:EquipTool(cc)
 local function getPredictedPosition(target)
