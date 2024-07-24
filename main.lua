@@ -174,7 +174,9 @@ function killnbring(target, acc)
 
 	startUpdating()
 
-	local loop = task.spawn(updatePosition())
+	local loop = task.spawn(function()
+		updatePosition()
+	end)
 	while true do
 		if isUpdating then 
 			if RTARGET.Character.Humanoid.Health <= 4 then
