@@ -223,6 +223,58 @@ function killnbring(target, acc)
 end
 
 
+function tphost(target, acc)
+	wait(2)
+	print(target, acc)
+	if acc ~= player.Name then  print("NOT VALID") return end
+	chat("Hey ive come to get you please do not run!")
+	local RTARGET = game.Players:WaitForChild(target)
+	print("TARGET IS CALLED: "..RTARGET.Name)
+
+	-- Function to update position
+	local function updatePosition()
+		wait(0.001)
+	
+		if host and host.Character and host.Character:FindFirstChild("HumanoidRootPart") then
+			local playerHRP = player.Character.HumanoidRootPart
+			playerHRP.CFrame =  host.Character.HumanoidRootPart.CFrame
+		end
+	end
+
+	if host.Character.Humanoid.Health <= 4 then
+				wait(1)
+				player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame * CFrame.new(0, 0, -5)
+				wait(0.4)
+				player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
+				wait(0.4)
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
+
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
+				wait(0.3)
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
+
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+				targetname = nil
+				botname = nil
+				break
+	else
+				print("clicking")
+				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+				wait(2)
+				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+	end
+end
+
+
+
 function stop(acc)
 	if acc ~= player.Name then return end
 	if isUpdating then
@@ -290,6 +342,21 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 					stop(Player.Name)
 				end
 			end
+		elseif part1 == "tph" then
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
+					print("Username: " .. Player.Name .. ", Display Name: " .. Player.DisplayName)
+					targetname = Player.Name
+				end
+			end
+
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[3]) or Player.DisplayName:find(parts[3]) then
+					print("Username: " .. Player.Name .. ", Display Name: " .. Player.DisplayName)
+					botname = Player.Name
+				end
+			end
+			tphost(targetname, botname)
 		end
 	end
 end)
