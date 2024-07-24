@@ -73,6 +73,7 @@ end
 function pickupmoney()
     for _, money in pairs(workspace.Ignored.Drop:GetChildren()) do
         if money.Name == "MoneyDrop" then
+            fireclickdetector(money.ClickDetector, 10)
             --money.ClickDetector:Fire("MouseClick", player)
         end
     end
@@ -127,6 +128,8 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             redeemcodes()
         elseif part1 == "msg" then
             chat(splitMessage)
+        elseif message = "pick" then
+            pickupmoney()
         end
     end
 end)
