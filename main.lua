@@ -275,6 +275,7 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
         player.Character.Humanoid:EquipTool(cc)
     else
         brings()
+    end
 end)
 
 
