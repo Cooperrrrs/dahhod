@@ -83,23 +83,22 @@ function  brings()
     print("startinmg function")
     local playerfolder =  workspace:WaitForChild("Players")
     local startPosition = host.Character.HumanoidRootPart.Position
-    local offset = Vector3.new(0, 0, 7)
+    local startCFrame = host.Character.HumanoidRootPart.CFrame
+    local lookVector = startCFrame.LookVector
+    local offset = 3
 
     for _, plr in pairs(playerfolder:GetChildren()) do
         if plr.Name == host.Name then
             for index, altName in pairs(ats) do
                 local altPlayer = game.Players:FindFirstChild(altName)
                 if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    local newPosition = startPosition + (index * offset)
-                    print(newPosition)
-                    local lookDirection = startCFrame.LookVector
-                    local offset2 = lookDirection * 5 -- Adjust the offset to move in front of the host
-                    altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition + offset2)
+                   altPlayer.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -index * -5)
                 end
             end
         end
     end
 end
+
 
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
