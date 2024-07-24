@@ -247,20 +247,20 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             local targetname = nil
             local botname = nil
            for _,Player in pairs(Players:GetPlayers()) do
-              if plr.Name:find(splitMessage) then
-                 targetname = plr.Name
+              if Player.Name:find(splitMessage) then
+                 targetname = Player.Name
               end
           end
             for _,Player in pairs(Players:GetPlayers()) do
-              if plr.Name:find(parts[3]) then
-                 botname = plr.Name
+              if Player.Name:find(parts[3]) then
+                 botname = Player.Name
               end
           end
             killnbring(targetname, botname)
         elseif message == "ss" then
           for _,Player in pairs(Players:GetPlayers()) do
-              if plr.Name:find(splitMessage) then
-                 stop(plr.Name)
+              if Player.Name:find(splitMessage) then
+                 stop(Player.Name)
               end
           end
         end
