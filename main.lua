@@ -276,3 +276,6 @@ TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
 TextLabel.TextScaled = true
 TextLabel.TextSize = 14.000
 TextLabel.TextWrapped = true
+
+
+ScreenGui.Enabled = false
