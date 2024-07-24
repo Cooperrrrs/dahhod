@@ -260,6 +260,8 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
               end
           end
             killnbring(targetname, botname)
+            targetname = nil
+            botname = nil
         elseif message == "ss" then
             chat("Returning back to weareout!")
           for _,Player in pairs(Players:GetPlayers()) do
