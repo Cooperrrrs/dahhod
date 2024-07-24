@@ -1,3 +1,19 @@
+-- Config
+
+_G.host = "devcoopr"
+_G.alts = {
+    ["1"] = "ObamaThePresident198",
+}
+
+_G.codes = {
+    "PENGUIN",
+    "BLAZE",
+    "RUBY",
+    "pumpkins2023",
+    "TRADEME!",
+    "DAUP",
+}
+
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
@@ -206,6 +222,13 @@ end
 end
 
 
+function stop(acc)
+ if acc ~= player.Name then return end
+ isUpdating = false
+ wait(0.2)
+ player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
+end
+
 
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
@@ -238,6 +261,8 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             bringsmall()
         elseif part1 == "bring" then
             killnbring(splitMessage, parts[3])
+        elseif message == "STOP" then
+            stop(splitMessage)
         end
     end
 end)
@@ -263,6 +288,8 @@ Frame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
 Frame.BorderColor3 = Color3.fromRGB(0, 0, 0)
 Frame.BorderSizePixel = 0
 Frame.Size = UDim2.new(1, 0, 1, 0)
+
+
 
 TextLabel.Parent = Frame
 TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
