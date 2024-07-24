@@ -241,6 +241,8 @@ function tphost(target, acc)
 		end
 	end
 
+    updatePosition()
+
 	if host.Character.Humanoid.Health <= 4 then
 				wait(1)
 				player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame * CFrame.new(0, 0, -5)
@@ -264,7 +266,7 @@ function tphost(target, acc)
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 				targetname = nil
 				botname = nil
-				break
+				return
 	else
 				print("clicking")
 				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
