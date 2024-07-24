@@ -127,6 +127,7 @@ end
 
 
 function killnbring(target, acc)
+	wait(2)
 	print(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
 	chat("Hey ive come to get you please do not run!")
