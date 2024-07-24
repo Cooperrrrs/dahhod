@@ -90,10 +90,11 @@ function  brings()
             for index, altName in pairs(ats) do
                 local altPlayer = game.Players:FindFirstChild(altName)
                 if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
-                    local newPosition = startPosition + (tonumber(index) * offset)
+                    local newPosition = startPosition + (index * offset)
                     print(newPosition)
-                    local offset2 = Vector3.new(0,0,5) -- in your case, Vector3.new(0,0,5), or something like that
-                    altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition)*CFrame.new(offset2)
+                    local lookDirection = startCFrame.LookVector
+                    local offset2 = lookDirection * 5 -- Adjust the offset to move in front of the host
+                    altPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(newPosition + offset2)
                 end
             end
         end
