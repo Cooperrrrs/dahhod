@@ -175,37 +175,40 @@ end
 startUpdating() 
 
 
-while true do
-
-    if RTARGET.Character.Humanoid.Health <= 4 then
-       stopUpdating()
-       wait(1)
-       player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
-       wait(0.5)
-        local args = {
-            [1] = "Grabbing",
-            [2] = false
-        }
-
-        game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-        
-        player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
-        wait(0.3)
-        local args = {
-            [1] = "Grabbing",
-            [2] = false
-        }
-
-        game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+    while true do
+        if isUpdating then 
+               if RTARGET.Character.Humanoid.Health <= 4 then
+                   stopUpdating()
+                   wait(1)
+                   player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
+                   wait(0.5)
+                    local args = {
+                        [1] = "Grabbing",
+                        [2] = false
+                    }
+            
+                    game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+                    
+                    player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
+                    wait(0.3)
+                    local args = {
+                        [1] = "Grabbing",
+                        [2] = false
+                    }
+            
+                    game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+                    targetname = nil
+                    botname = nil
+                    break
+            else
+                print("clicking")
+                VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+                wait(2)
+                VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+            end
+     else
         break
-    else
-    print("clicking")
-    VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-    wait(2)
-    VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
     end
-end
-
 end
 
 
