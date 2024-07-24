@@ -137,7 +137,7 @@ function killnbring(target, acc)
 		if not targetHRP then return nil end
 
 		local targetVelocity = targetHRP.Velocity
-		local predictionTime = 0.5  -- Time in seconds to predict ahead
+		local predictionTime = 0.3
 		local predictedPosition = targetHRP.Position + targetVelocity * predictionTime
 
 		return CFrame.new(predictedPosition)
