@@ -175,7 +175,7 @@ while true do
 
     if RTARGET.Character.Humanoid.Health <= 4 then
        stopUpdating()
-       wait(0.3)
+       wait(1)
        player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
        wait(0.3)
         local args = {
