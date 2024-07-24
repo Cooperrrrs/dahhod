@@ -6,6 +6,11 @@ local host = Players:FindFirstChild(_G.host)
 local players, replicatedStorage = game:GetService("Players"), game:GetService("ReplicatedStorage");
 local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
 local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMessageDoneFiltering");
+local VirtualUser = game:GetService("VirtualUser")
+local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+local isUpdating = false  -- Toggle this flag to start or stop updating
+local updateConnection
+local RunService = game:GetService("RunService")
 
 local drop = nil
 
@@ -99,6 +104,100 @@ function  brings()
     end
 end
 
+function  bringsmall()
+    local playerfolder =  workspace:WaitForChild("Players")
+    local startPosition = host.Character.HumanoidRootPart.Position
+    local startCFrame = host.Character.HumanoidRootPart.CFrame
+    local lookVector = startCFrame.LookVector
+    local offset = 3
+
+    for _, plr in pairs(playerfolder:GetChildren()) do
+        if plr.Name == host.Name then
+            for index, altName in pairs(ats) do
+                local altPlayer = game.Players:FindFirstChild(altName)
+                if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                   altPlayer.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end
+end
+
+
+
+function killnbring(target)
+local RTARGET = game.Players:WaitForChild(target)
+local function getPredictedPosition(target)
+    local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
+    if not targetHRP then return nil end
+
+    local targetVelocity = targetHRP.Velocity
+    local predictionTime = 0.5  -- Time in seconds to predict ahead
+    local predictedPosition = targetHRP.Position + targetVelocity * predictionTime
+
+    return CFrame.new(predictedPosition)
+end
+
+-- Function to update position
+local function updatePosition()
+    if not isUpdating then return end  -- Only update if isUpdating is true
+
+    if RTARGET and RTARGET.Character and RTARGET.Character:FindFirstChild("HumanoidRootPart") then
+        local targetPredictedCFrame = getPredictedPosition(RTARGET)
+        if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+            local playerHRP = player.Character.HumanoidRootPart
+            playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0, 3, 0) -- Adjust the offset as needed
+        end
+    end
+end
+
+-- Function to start updating position
+local function startUpdating()
+    if not isUpdating then
+        isUpdating = true
+        if not updateConnection then
+            updateConnection = RunService.RenderStepped:Connect(updatePosition)
+        end
+    end
+end
+
+-- Function to stop updating position
+local function stopUpdating()
+    if isUpdating then
+        isUpdating = false
+    end
+end
+
+startUpdating() 
+
+
+while true do
+
+    if RTARGET.Character.Humanoid.Health <= 4 then
+       stopUpdating()
+       wait(0.1)
+       player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
+       wait(0.1)
+        local args = {
+            [1] = "Grabbing",
+            [2] = false
+        }
+
+        game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+        
+        player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
+        break
+    else
+    print("clicking")
+    VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+    wait(2)
+    VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+    end
+end
+
+end
+
+
 
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
@@ -127,8 +226,10 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             redeemcodes()
         elseif part1 == "msg" then
             chat(splitMessage)
-        elseif message == "pick" then
-            pickupmoney()
+        elseif message == "bring small" then
+            bringsmall()
+        elseif part1 == "bring" then
+            killnbring(splitMessage)
         end
     end
 end)
