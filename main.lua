@@ -230,6 +230,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             chat("Returning back to weareout!")
             brings()
         elseif message == "drop true" then
+            if game.Players.LocalPlayer.DisplayName == "BodyGuard" then return end
                 chat("Started Droping")
                  local walletTool = player.Backpack:FindFirstChild("Wallet")
                     if walletTool then
