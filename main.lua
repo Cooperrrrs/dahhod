@@ -10,7 +10,7 @@ local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMes
 local drop = nil
 
 local ats = {
-    ["1"] = "ragebestestguyever",
+    ["1"] = "SixterYeeter",
     ["2"] = "Gamer_yt413",
     ["3"] = "Blowqepew",
     ["4"] = "pollito_yt5530",
