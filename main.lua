@@ -213,7 +213,13 @@ function stop(acc)
  player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
 end
 
-
+function string.split(input, delimiter)
+    local result = {}
+    for match in (input..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match)
+    end
+    return result
+end
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
     local speaker, message = players[messageData.FromSpeaker], messageData.Message
@@ -225,6 +231,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 
         print("Found host")
         if message == "bring" then
+            chat("Returning back to weareout!")
             brings()
         elseif message == "drop true" then
                 chat("Started Droping")
@@ -240,10 +247,14 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
         elseif message == "redeem codes" then
             redeemcodes()
         elseif part1 == "msg" then
-            chat(splitMessage)
+            local parts55 = string.split(message, " ")
+            local splitMessage55 = table.concat(parts55, " ", 2)
+            chat(splitMessage55)
         elseif message == "bring small" then
+            chat("Returning back to weareout!")
             bringsmall()
         elseif part1 == "bring" then
+            chat("Hey ive come to get you please do not run!")
             local targetname = nil
             local botname = nil
            for _,Player in pairs(Players:GetPlayers()) do
@@ -258,6 +269,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
           end
             killnbring(targetname, botname)
         elseif message == "ss" then
+            chat("Returning back to weareout!")
           for _,Player in pairs(Players:GetPlayers()) do
               if Player.Name:find(splitMessage) then
                  stop(Player.Name)
