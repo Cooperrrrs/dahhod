@@ -250,17 +250,19 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             bringsmall()
         elseif part1 == "bring" then
             chat("Hey ive come to get you please do not run!")
-           for _,Player in pairs(Players:GetPlayers()) do
-              if Player.Name:find(splitMessage) then
-                 print(Player.Name)
-                 targetname = Player.Name
-              end
-          end
-            for _,Player in pairs(Players:GetPlayers()) do
-              if Player.Name:find(parts[3]) then
-                 print(Player.Name)
-                 botname = Player.Name
-              end
+            for _, Player in pairs(Players:GetPlayers()) do
+                if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
+                    print("Username: " .. Player.Name .. ", Display Name: " .. Player.DisplayName)
+                    targetname = Player.Name
+                end
+            end
+                
+            for _, Player in pairs(Players:GetPlayers()) do
+                if Player.Name:find(parts[3]) or Player.DisplayName:find(parts[3]) then
+                    print("Username: " .. Player.Name .. ", Display Name: " .. Player.DisplayName)
+                    botname = Player.Name
+                end
+            end
           end
             killnbring(targetname, botname)
         elseif message == "ss" then
