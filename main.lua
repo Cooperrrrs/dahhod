@@ -11,6 +11,8 @@ local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
 local isUpdating = false  -- Toggle this flag to start or stop updating
 local updateConnection
 local RunService = game:GetService("RunService")
+local targetname = nil
+local botname = nil
 
 local drop = nil
 
@@ -248,8 +250,6 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
             bringsmall()
         elseif part1 == "bring" then
             chat("Hey ive come to get you please do not run!")
-            local targetname = nil
-            local botname = nil
            for _,Player in pairs(Players:GetPlayers()) do
               if Player.Name:find(splitMessage) then
                  print(Player.Name)
@@ -263,8 +263,6 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
               end
           end
             killnbring(targetname, botname)
-            targetname = nil
-            botname = nil
         elseif message == "ss" then
             chat("Returning back to weareout!")
           for _,Player in pairs(Players:GetPlayers()) do
@@ -281,7 +279,7 @@ end)
 game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
     print("died")
     if isUpdating == true then
-        player.Character.Humanoid:EquipTool(cc)
+         killnbring(targetname, botname)
     else
         brings()
     end
