@@ -272,7 +272,6 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
                  stop(Player.Name)
               end
           end
-        end
     end
 end)
 
