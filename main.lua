@@ -269,7 +269,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
         elseif message == "ss" then
             chat("Returning back to weareout!")
           for _,Player in pairs(Players:GetPlayers()) do
-              if Player.Name:find(splitMessage) then
+              if Player.Name:find(splitMessage) or  Player.DisplayName:find(splitMessage) then
                  stop(Player.Name)
               end
           end
