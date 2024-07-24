@@ -251,7 +251,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
         elseif message == "bring small" then
             chat("Returning back to weareout!")
             bringsmall()
-        elseif part1 == "bring" then
+        elseif part1 == "tp" then
             chat("Hey ive come to get you please do not run!")
             for _, Player in pairs(Players:GetPlayers()) do
                 if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
