@@ -2,31 +2,16 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
 local player = Players.LocalPlayer
-local host = Players:FindFirstChild("devcoopr")
+local host = Players:FindFirstChild(_G.host)
 local players, replicatedStorage = game:GetService("Players"), game:GetService("ReplicatedStorage");
 local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
 local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMessageDoneFiltering");
 
 local drop = nil
 
-local ats = {
-    ["1"] = "SixterYeeter",
-    ["2"] = "Gamer_yt413",
-    ["3"] = "Blowqepew",
-    ["4"] = "pollito_yt5530",
-    ["5"] = "MoozeDK",
-    ["6"] = "akaishaiki",
-    ["7"] = "LEYENGAMER_YT3"
-}
+local ats = _G.alts
 
-local codes = {
-    "PENGUIN",
-    "BLAZE",
-    "RUBY",
-    "pumpkins2023",
-    "TRADEME!",
-    "DAUP",
-}
+local codes = _G.codes
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
 
