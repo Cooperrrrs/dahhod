@@ -211,7 +211,9 @@ end
 
 function stop(acc)
  if acc ~= player.Name then return end
- isUpdating = false
+    if isUpdating then
+            isUpdating = false
+    end
  wait(0.2)
  player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
 end
