@@ -74,7 +74,6 @@ function pickupmoney()
     for _, money in pairs(workspace.Ignored.Drop:GetChildren()) do
         if money.Name == "MoneyDrop" then
             fireclickdetector(money.ClickDetector, 10)
-            --money.ClickDetector:Fire("MouseClick", player)
         end
     end
 end
