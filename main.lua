@@ -363,7 +363,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 		elseif part1 == "hide" then
 			for _, Player in pairs(Players:GetPlayers()) do
 				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
-					targetname = Player.Name
+					hide(Player.Name)
 				end
 			end
 		end
