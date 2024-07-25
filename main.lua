@@ -1,21 +1,3 @@
--- Config
-
-_G.host = "devcoopr"
-_G.alts = {
-    ["1"] = "devcoopr",
-}
-
-
-_G.codes = {
-    "PENGUIN",
-    "BLAZE",
-    "RUBY",
-    "pumpkins2023",
-    "TRADEME!",
-    "DAUP",
-}
-
-
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
