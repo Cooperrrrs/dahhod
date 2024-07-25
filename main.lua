@@ -1,3 +1,21 @@
+-- Config
+
+_G.host = "devcoopr"
+_G.alts = {
+    ["1"] = "devcoopr",
+}
+
+
+_G.codes = {
+    "PENGUIN",
+    "BLAZE",
+    "RUBY",
+    "pumpkins2023",
+    "TRADEME!",
+    "DAUP",
+}
+
+
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
@@ -238,9 +256,9 @@ function tphost(target, acc)
 	while true do
 		if host.Character.Humanoid.Health <= 4 then
 			wait(1)
-			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame * CFrame.new(0, 5, 0)
+			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
 			wait(0.4)
-			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
+			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
 			print("OOGGAAA")
 			wait(0.4)
 			local args = {
@@ -287,8 +305,6 @@ function hide(acc)
 if acc ~= player.Name then return end
 	player.Character.HumanoidRootPart.CFrame = hideplace
 	player.Character.HumanoidRootPart.Anchored = true
-	wait(1)
-	player.Character.HumanoidRootPart.Anchored = false
 end
 
 
