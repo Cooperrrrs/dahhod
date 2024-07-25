@@ -15,6 +15,7 @@ local botname = nil
 local drop = nil
 local ats = _G.alts
 local codes = _G.codes
+local hideplace = CFrame.new(0,0,0)
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
 
@@ -282,6 +283,12 @@ function stop(acc)
 	player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
 end
 
+function hide(acc)
+if acc ~= player.Name then return end
+	player.Character.HumanoidRootPart.CFrame = hideplace
+	player.Character.HumanoidRootPart.Anchored = true
+end
+
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 	local speaker, message = players[messageData.FromSpeaker], messageData.Message
@@ -353,6 +360,12 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 				end
 			end
 			tphost(targetname, botname)
+		elseif part1 == "hide" then
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
+					targetname = Player.Name
+				end
+			end
 		end
 	end
 end)
