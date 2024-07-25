@@ -287,6 +287,8 @@ function hide(acc)
 if acc ~= player.Name then return end
 	player.Character.HumanoidRootPart.CFrame = hideplace
 	player.Character.HumanoidRootPart.Anchored = true
+	wait(1)
+	player.Character.HumanoidRootPart.Anchored = false
 end
 
 
