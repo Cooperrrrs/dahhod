@@ -82,7 +82,7 @@ end
 function  brings()
 	print("startinmg function")
 	local playerfolder =  workspace:WaitForChild("Players")
-	
+
 	for _, plr in pairs(playerfolder:GetChildren()) do
 		if plr.Name == host.Name then
 			for index, altName in pairs(ats) do
@@ -115,9 +115,9 @@ end
 function killnbring(target, acc)
 	wait(2)
 	if acc ~= player.Name then return end
-	
+
 	chat("Hey ive come to get you please do not run!")
-	
+
 	local RTARGET = game.Players:WaitForChild(target)
 
 	local function getPredictedPosition(target)
@@ -284,9 +284,15 @@ function stop(acc)
 end
 
 function hide(acc)
-if acc ~= player.Name then return end
+	if acc ~= player.Name then return end
 	player.Character.HumanoidRootPart.CFrame = hideplace
 	player.Character.HumanoidRootPart.Anchored = true
+end
+
+function unhide(acc)
+	if acc ~= player.Name then return end
+	brings()
+	player.Character.HumanoidRootPart.Anchored = false
 end
 
 
@@ -364,6 +370,12 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 			for _, Player in pairs(Players:GetPlayers()) do
 				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
 					hide(Player.Name)
+				end
+			end
+		elseif part1 == "unhide" then
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
+					unhide(Player.Name)
 				end
 			end
 		end
