@@ -15,7 +15,7 @@ local botname = nil
 local drop = nil
 local ats = _G.alts
 local codes = _G.codes
-local hideplace = CFrame.new(0,0,0)
+local hideplace = CFrame.new(342.968323, 21.7499905, 130.013672, 0.0817344561, 5.39478862e-08, 0.996654153, 7.82229215e-09, 1, -5.47704921e-08, -0.996654153, 1.22727561e-08, 0.0817344561)
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
 
