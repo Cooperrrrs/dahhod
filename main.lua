@@ -648,6 +648,17 @@ game:GetService("Players").LocalPlayer.Character.Head.Touched:connect(function(o
 	end
 end)
 
+game:GetService("Players").LocalPlayer.Character.RightFoot.Touched:connect(function(obj)
+	if obj ~= workspace.Terrain then
+		obj.CanCollide = true
+	end
+end)
+
+game:GetService("Players").LocalPlayer.Character.LeftFoot.Touched:connect(function(obj)
+	if obj ~= workspace.Terrain then
+		obj.CanCollide = true
+	end
+end)
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
