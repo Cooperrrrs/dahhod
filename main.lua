@@ -149,11 +149,6 @@ function killnbring(target, acc)
 			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 				local playerHRP = player.Character.HumanoidRootPart
 				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,-3,0)
-				 for i, v in pairs(Workspace[playerHRP]:GetChildren()) do
-			                if v:IsA("BasePart") then
-			                   v.CanCollide = false
-					end
-			        end
 			end
 		end
 	end
@@ -638,7 +633,7 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
 	end
 end)
 
-game:GetService("Players").LocalPlayer.Character.Head.Touched:connect(function(obj)
+game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Touched:connect(function(obj)
 	if obj ~= workspace.Terrain then
 		if donoclip == true then
 			obj.CanCollide = false
