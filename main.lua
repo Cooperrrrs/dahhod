@@ -13,6 +13,9 @@ local RunService = game:GetService("RunService")
 local targetname = nil
 local botname = nil
 local drop = nil
+local plrtobring = nil
+local plrtogoto = nil
+local botgoing = nil
 local ats = _G.alts
 local codes = _G.codes
 local hideplace = CFrame.new(342.968323, 21.7499905, 130.013672, 0.0817344561, 5.39478862e-08, 0.996654153, 7.82229215e-09, 1, -5.47704921e-08, -0.996654153, 1.22727561e-08, 0.0817344561)
@@ -73,7 +76,7 @@ end
 function pickupmoney()
 	for _, money in pairs(workspace.Ignored.Drop:GetChildren()) do
 		if money.Name == "MoneyDrop" then
-			fireclickdetector(money.ClickDetector)
+			--fireclickdetector(money.ClickDetector)
 		end
 	end
 end
@@ -272,6 +275,114 @@ function tphost(target, acc)
 end
 
 
+function tpo(plrtobring, plrtogoto, botgoing)
+	wait(2)
+	if botgoing ~= player.Name then return end
+
+	chat("Hey ive come to get you please do not run!")
+
+	local TPTARGET = game.Players:WaitForChild(plrtobring)
+	local BTARGET = game.Players:WaitForChild(plrtogoto)
+
+	local function getPredictedPosition(target)
+		local targetHRP = TPTARGET.Character:FindFirstChild("HumanoidRootPart")
+		if not targetHRP then return nil end
+
+		local targetVelocity = targetHRP.Velocity
+		local predictionTime = 0.3
+		local predictedPosition = targetHRP.Position + targetVelocity * predictionTime
+
+		return CFrame.new(predictedPosition)
+	end
+
+	-- Function to update position
+	local function updatePosition()
+		wait(0.001)
+		if not isUpdating then return end  -- Only update if isUpdating is true
+
+		if TPTARGET and TPTARGET.Character and TPTARGET.Character:FindFirstChild("HumanoidRootPart") then
+			local targetPredictedCFrame = getPredictedPosition(TPTARGET)
+			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+				local playerHRP = player.Character.HumanoidRootPart
+				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0, 3, 0) -- Adjust the offset as needed
+				print(targetPredictedCFrame)
+			end
+		end
+	end
+
+	-- Function to start updating position
+	local function startUpdating()
+		if not isUpdating then
+			isUpdating = true
+			if not updateConnection then
+				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+				player.Character.Humanoid:EquipTool(cc)
+				updateConnection = RunService.RenderStepped:Connect(updatePosition)
+			end
+		end
+	end
+
+	-- Function to stop updating position
+	local function stopUpdating()
+		if isUpdating then
+			isUpdating = false
+			if updateConnection then
+				updateConnection:Disconnect()
+				updateConnection = nil
+			end
+		end
+	end
+
+	startUpdating()
+
+	while true do
+		if isUpdating then 
+			if TPTARGET.Character.Humanoid.Health <= 4 then
+				stopUpdating()
+				wait(0.4)
+				player.Character.HumanoidRootPart.CFrame = player.Character.Head.CFrame
+				wait(0.5)
+				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
+				wait(0.2)
+				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
+				wait(0.3)
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
+
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+
+				player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+				wait(0.3)
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
+
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+				plrtobring = nil
+				plrtogoto = nil
+				botgoing = nil
+				chat("Here is the person you requested!")
+				wait(1.5)
+				player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+				
+				break
+			else
+				print("clicking")
+				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+				wait(3)
+				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+			end
+		else
+			break
+		end
+	end
+end
+
+
+
 
 function stop(acc)
 	if acc ~= player.Name then return end
@@ -285,15 +396,33 @@ function stop(acc)
 end
 
 function hide(acc)
-	if acc ~= player.Name then return end
-	player.Character.HumanoidRootPart.CFrame = hideplace
+	if acc == "All" then
+		player.Character.HumanoidRootPart.CFrame = hideplace
+	else
+		if acc ~= player.Name then return end
+		player.Character.HumanoidRootPart.CFrame = hideplace
+	end
 end
 
 function unhide(acc)
-	if acc ~= player.Name then return end
-	brings()
-	player.Character.HumanoidRootPart.Anchored = false
+	if acc == "All" then
+		brings()
+	else
+		if acc ~= player.Name then return end
+		brings()
+	end
 end
+
+local cmdst = {
+	"ss",
+	"ssss",
+	"Sssss",
+}
+
+function cmds()
+	chat(cmdst)
+end
+
 
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
@@ -305,10 +434,10 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 		print(splitMessage)  -- Output: hello
 
 		print("Found host")
-		if message == "bring" then
+		if string.lower(message) == "bring" then
 			chat("Returning back to weareout!")
 			brings()
-		elseif message == "drop true" then
+		elseif string.lower(message) == "drop true" then
 			if game.Players.LocalPlayer.DisplayName == "BodyGuard" then return end
 			chat("Started Droping")
 			local walletTool = player.Backpack:FindFirstChild("Wallet")
@@ -317,18 +446,18 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 			else
 			end
 			autodrop(true)
-		elseif message == "drop false" then
+		elseif string.lower(message) == "drop false" then
 			chat("Stopped Droping")
 			autodrop(false)
-		elseif message == "redeem codes" then
+		elseif string.lower(message) == "redeem codes" then
 			redeemcodes()
-		elseif part1 == "msg" then
+		elseif string.lower(part1) == "msg" then
 			local command, restOfMessage = message:match("^(%S+)%s+(.+)$")
 			chat(restOfMessage)
-		elseif message == "bring small" then
+		elseif string.lower(message) == "bring small" then
 			chat("Returning back to weareout!")
 			bringsmall()
-		elseif part1 == "tp" then
+		elseif string.lower(part1) == "tp" then
 			for _, Player in pairs(Players:GetPlayers()) do
 				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
 					print("Username: " .. Player.Name .. ", Display Name: " .. Player.DisplayName)
@@ -344,14 +473,14 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 			end
 			killnbring(targetname, botname)
 
-		elseif part1 == "ss" then
+		elseif string.lower(part1) == "ss" then
 			chat("Returning back to weareout!")
 			for _,Player in pairs(Players:GetPlayers()) do
 				if Player.Name:find(splitMessage) or  Player.DisplayName:find(splitMessage) then
 					stop(Player.Name)
 				end
 			end
-		elseif part1 == "tph" then
+		elseif string.lower(part1) == "tph" then
 			for _, Player in pairs(Players:GetPlayers()) do
 				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
 					print("Username: " .. Player.Name .. ", Display Name: " .. Player.DisplayName)
@@ -366,18 +495,48 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 				end
 			end
 			tphost(targetname, botname)
-		elseif part1 == "hide" then
-			for _, Player in pairs(Players:GetPlayers()) do
-				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
-					hide(Player.Name)
+		elseif string.lower(part1) == "hide" then
+			if splitMessage == "All" then
+				hide("All")
+			else
+				for _, Player in pairs(Players:GetPlayers()) do
+					if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
+						hide(Player.Name)
+					end
 				end
 			end
-		elseif part1 == "unhide" then
-			for _, Player in pairs(Players:GetPlayers()) do
-				if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
-					unhide(Player.Name)
+		elseif string.lower(part1) == "unhide" then
+			if splitMessage == "All" then
+				unhide("All")
+			else
+				for _, Player in pairs(Players:GetPlayers()) do
+					if Player.Name:find(splitMessage) or Player.DisplayName:find(splitMessage) then
+						unhide(Player.Name)
+					end
 				end
 			end
+		elseif string.lower(part1) == "tpo" then
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[2]) or Player.DisplayName:find(parts[2]) then
+					plrtobring = Player.Name
+				end
+			end
+			
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[3]) or Player.DisplayName:find(parts[3]) then
+					plrtogoto = Player.Name
+				end
+			end
+			
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[4]) or Player.DisplayName:find(parts[4]) then
+					botgoing = Player.Name
+				end
+			end
+			
+			tpo(plrtobring, plrtogoto, botgoing)
+		elseif string.lower(message) == "cmds" then
+			cmds()
 		end
 	end
 end)
