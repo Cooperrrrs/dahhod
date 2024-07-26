@@ -117,8 +117,6 @@ end
 
 function killnbring(target, acc)
 	wait(2)
-	player.Character.Head.CanCollide = false 
-        player.Character.Torso.CanCollide = false
 	if acc ~= player.Name then return end
 
 	chat("Hey ive come to get you please do not run!")
@@ -146,7 +144,11 @@ function killnbring(target, acc)
 			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 				local playerHRP = player.Character.HumanoidRootPart
 				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,-3,0)
-				print(targetPredictedCFrame)
+				 for i, v in pairs(Workspace[playerHRP]:GetChildren()) do
+			                if v:IsA("BasePart") then
+			                   v.CanCollide = false
+					end
+			        end
 			end
 		end
 	end
@@ -168,8 +170,11 @@ function killnbring(target, acc)
 		if isUpdating then
 			isUpdating = false
 			if updateConnection then
-				player.Character.Head.CanCollide = true 
-			        player.Character.Torso.CanCollide = true
+ 				for i, v in pairs(Workspace[playerHRP]:GetChildren()) do
+			                if v:IsA("BasePart") then
+			                   v.CanCollide = false
+					end
+			        end
 				updateConnection:Disconnect()
 				updateConnection = nil
 			end
