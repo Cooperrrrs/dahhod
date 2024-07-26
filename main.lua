@@ -138,7 +138,17 @@ function killnbring(target, acc)
 
 		return CFrame.new(predictedPosition)
 	end
-
+	
+	local function stopUpdating()
+		if isUpdating then
+			isUpdating = false
+			if updateConnection then
+				updateConnection:Disconnect()
+				updateConnection = nil
+			end
+		end
+	end
+	
 	-- Function to update position
 	local function updatePosition()
 		wait(0.001)
@@ -150,6 +160,15 @@ function killnbring(target, acc)
 				local playerHRP = player.Character.HumanoidRootPart
 				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,3,0)
 			end
+		else
+			stopUpdating()
+			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+			chat("User has left or not found!")
+			wait(2)
+			
+			plrtobring = nil
+			plrtogoto = nil
+			botgoing = nil
 		end
 	end
 
@@ -159,22 +178,14 @@ function killnbring(target, acc)
 			isUpdating = true
 			if not updateConnection then
 				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
-				player.Character.Humanoid:EquipTool(cc)
+				cc.Parent = game.Players.LocalPlayer.Character
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
 			end
 		end
 	end
 
 	-- Function to stop updating position
-	local function stopUpdating()
-		if isUpdating then
-			isUpdating = false
-			if updateConnection then
-				updateConnection:Disconnect()
-				updateConnection = nil
-			end
-		end
-	end
+
 
 	startUpdating()
 
@@ -233,7 +244,7 @@ function killnbring(target, acc)
 			else
 				print("clicking")
 				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-				wait(3)
+				wait(1)
 				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 			end
 		else
@@ -252,7 +263,7 @@ function tphost(target, acc)
 	local RTARGET = game.Players:WaitForChild(target)
 	print("TARGET IS CALLED: "..RTARGET.Name)
 	local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
-	player.Character.Humanoid:EquipTool(cc)
+	cc.Parent = game.Players.LocalPlayer.Character
 
 	-- Function to update position
 	local function updatePosition()
@@ -321,7 +332,7 @@ function tphost(target, acc)
 		else
 			print("clicking")
 			VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-			wait(3)
+			wait(1)
 			VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 		end
 	end
@@ -348,7 +359,18 @@ function tpo(plrtobring, plrtogoto, botgoing)
 
 		return CFrame.new(predictedPosition)
 	end
+	
+	local function stopUpdating()
+		if isUpdating then
+			isUpdating = false
+			if updateConnection then
+				updateConnection:Disconnect()
+				updateConnection = nil
 
+			end
+		end
+	end
+	
 	-- Function to update position
 	local function updatePosition()
 		wait(0.001)
@@ -361,6 +383,15 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,2,0)
 				print(targetPredictedCFrame)
 			end
+		else
+			stopUpdating()
+			player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame
+			chat("User has left or not found!")
+			wait(2)
+			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+			plrtobring = nil
+			plrtogoto = nil
+			botgoing = nil
 		end
 	end
 
@@ -370,22 +401,14 @@ function tpo(plrtobring, plrtogoto, botgoing)
 			isUpdating = true
 			if not updateConnection then
 				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
-				player.Character.Humanoid:EquipTool(cc)
+				cc.Parent = game.Players.LocalPlayer.Character
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
 			end
 		end
 	end
 
 	-- Function to stop updating position
-	local function stopUpdating()
-		if isUpdating then
-			isUpdating = false
-			if updateConnection then
-				updateConnection:Disconnect()
-				updateConnection = nil
-			end
-		end
-	end
+
 
 	startUpdating()
 
@@ -444,14 +467,14 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				end
 
 				chat("Here is the person you requested!")
-				wait(1.5)
+				wait(2)
 				player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
 
 				break
 			else
 				print("clicking")
 				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-				wait(3)
+				wait(1)
 				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 			end
 		else
@@ -496,10 +519,16 @@ end
 
 
 function cmds()
-	chat("Bring, drop, tp, tph, tpo, ss, msg, hide, unhide, kick")
+	chat("Bring, drop, tp, tph, tpo, ss, msg, hide, unhide, kick, rejoin")
 end
 
+function rejoin()
+	local TeleportService = game:GetService("TeleportService")
+	local placeId = game.PlaceId
+	local jobId = game.JobId 
 
+	TeleportService:TeleportToPlaceInstance(placeId, jobId, game.Players.LocalPlayer)
+end
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 	local host = Players:FindFirstChild(_G.host)
@@ -620,6 +649,13 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 					Player:Kick("The host has requested to kick you")
 				end
 			end
+		elseif string.lower(part1) == "rejoin" then
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[2]) or Player.DisplayName:find(parts[2]) then
+					chat("I am rejoining!")
+					rejoin()
+				end
+			end
 		end
 	end
 end)
@@ -627,7 +663,7 @@ end)
 
 
 game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
-	print("died")
+	wait(2)
 	if isUpdating == true then
 		killnbring(targetname, botname)
 	else
