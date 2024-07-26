@@ -510,7 +510,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 			chat("Returning back to weareout!")
 			brings()
 		elseif string.lower(message) == "drop true" then
-			if game.Players.LocalPlayer.DisplayName == "BodyGuard" then return end
+			if string.find(player.DisplayName, "BodyGuard") then return end
 			chat("Started Droping")
 			local walletTool = player.Backpack:FindFirstChild("Wallet")
 			if walletTool then
@@ -658,4 +658,8 @@ TextLabel.TextSize = 14.000
 TextLabel.TextWrapped = true
 
 
-ScreenGui.Enabled = false
+if string.find(player.DisplayName, "BodyGuard") then
+	ScreenGui.Enabled = false
+else
+	ScreenGui.Enabled = true
+end
