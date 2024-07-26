@@ -127,6 +127,11 @@ function killnbring(target, acc)
 	chat(_G.Pickup)
 
 	local RTARGET = game.Players:WaitForChild(target)
+	if RTARGET == nil then
+		chat("Player isnt found!")
+		return
+	else
+	end
 
 	local function getPredictedPosition(target)
 		local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
@@ -261,6 +266,11 @@ function tphost(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
 	chat(_G.Pickup)
 	local RTARGET = game.Players:WaitForChild(target)
+	if RTARGET == nil then
+		chat("Player isnt found!")
+		return
+	else
+	end
 	print("TARGET IS CALLED: "..RTARGET.Name)
 	local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
 	cc.Parent = game.Players.LocalPlayer.Character
@@ -347,7 +357,17 @@ function tpo(plrtobring, plrtogoto, botgoing)
 	chat(_G.Pickup)
 
 	local TPTARGET = game.Players:WaitForChild(plrtobring)
+	if RTARGET == nil then
+		chat("Player isnt found!")
+		return
+	else
+	end
 	local BTARGET = game.Players:WaitForChild(plrtogoto)
+	if BTARGET == nil then
+		chat("Player isnt found!")
+		return
+	else
+	end
 
 	local function getPredictedPosition(target)
 		local targetHRP = TPTARGET.Character:FindFirstChild("HumanoidRootPart")
