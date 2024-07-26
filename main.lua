@@ -184,24 +184,47 @@ function killnbring(target, acc)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
 				wait(0.2)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -5)
-				wait(0.3)
-				local args = {
-					[1] = "Grabbing",
-					[2] = false
-				}
-
-				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-
-				player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-				wait(0.3)
-				local args = {
-					[1] = "Grabbing",
-					[2] = false
-				}
-
-				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-				targetname = nil
-				botname = nil
+				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+				if distance <= 4 then
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+	
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+	
+					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+	
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+					targetname = nil
+					botname = nil
+				else
+					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
+					ait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+	
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+	
+					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+	
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+					targetname = nil
+					botname = nil
+					
 				break
 			else
 				print("clicking")
@@ -242,28 +265,52 @@ function tphost(target, acc)
 	while true do
 		if host.Character.Humanoid.Health <= 4 then
 			wait(1)
-			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
+			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
 			wait(0.4)
-			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
-			print("OOGGAAA")
-			wait(0.4)
-			local args = {
-				[1] = "Grabbing",
-				[2] = false
-			}
-
-			game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-
-			player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-			wait(0.3)
-			local args = {
-				[1] = "Grabbing",
-				[2] = false
-			}
-
-			game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-			targetname = nil
-			botname = nil
+			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+			local distance = (host.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+				if distance <= 4 then
+					print("OOGGAAA")
+					wait(0.4)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+		
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+		
+					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+		
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+					targetname = nil
+					botname = nil
+				else
+					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+					print("OOGGAAA")
+					wait(0.4)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+		
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+		
+					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+		
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+					targetname = nil
+					botname = nil
+				end
 			break
 		else
 			print("clicking")
@@ -344,26 +391,51 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				wait(0.5)
 				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
 				wait(0.2)
-				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -5)
-				wait(0.3)
-				local args = {
-					[1] = "Grabbing",
-					[2] = false
-				}
-
-				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-
-				player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-				wait(0.3)
-				local args = {
-					[1] = "Grabbing",
-					[2] = false
-				}
-
-				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-				plrtobring = nil
-				plrtogoto = nil
-				botgoing = nil
+				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
+				local distance = (host.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+					if distance <= 4 then
+						wait(0.3)
+						local args = {
+							[1] = "Grabbing",
+							[2] = false
+						}
+		
+						game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+		
+						player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+						wait(0.3)
+						local args = {
+							[1] = "Grabbing",
+							[2] = false
+						}
+		
+						game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+						plrtobring = nil
+						plrtogoto = nil
+						botgoing = nil
+					else
+						player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
+						wait(0.3)
+						local args = {
+							[1] = "Grabbing",
+							[2] = false
+						}
+		
+						game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+		
+						player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+						wait(0.3)
+						local args = {
+							[1] = "Grabbing",
+							[2] = false
+						}
+		
+						game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+						plrtobring = nil
+						plrtogoto = nil
+						botgoing = nil
+					end
+				
 				chat("Here is the person you requested!")
 				wait(1.5)
 				player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
