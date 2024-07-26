@@ -19,6 +19,10 @@ local botgoing = nil
 local ats = _G.alts
 local codes = _G.codes
 local hideplace = CFrame.new(342.968323, 21.7499905, 130.013672, 0.0817344561, 5.39478862e-08, 0.996654153, 7.82229215e-09, 1, -5.47704921e-08, -0.996654153, 1.22727561e-08, 0.0817344561)
+local donoclip = false
+
+
+
 
 loadstring(game:HttpGet('https://raw.githubusercontent.com/luca5432/Roblox-ANTI-AFK-SCRIPT/main/Script'))()
 
@@ -116,6 +120,7 @@ end
 
 
 function killnbring(target, acc)
+	donoclip = true
 	wait(2)
 	if acc ~= player.Name then return end
 
@@ -234,7 +239,7 @@ function killnbring(target, acc)
 					targetname = nil
 					botname = nil
 				end
-
+				donoclip = false
 				break
 			else
 				print("clicking")
@@ -250,6 +255,7 @@ end
 
 
 function tphost(target, acc)
+	donoclip = true
 	wait(2)
 	print(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
@@ -321,6 +327,7 @@ function tphost(target, acc)
 				targetname = nil
 				botname = nil
 			end
+			donoclip = false
 			break
 		else
 			print("clicking")
@@ -333,6 +340,7 @@ end
 
 
 function tpo(plrtobring, plrtogoto, botgoing)
+	donoclip = true
 	wait(2)
 	if botgoing ~= player.Name then return end
 
@@ -449,7 +457,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				chat("Here is the person you requested!")
 				wait(1.5)
 				player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-
+				donoclip = false
 				break
 			else
 				print("clicking")
@@ -627,6 +635,16 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
 		killnbring(targetname, botname)
 	else
 		brings()
+	end
+end)
+
+game:GetService("Players").LocalPlayer.Character.Head.Touched:connect(function(obj)
+	if obj ~= workspace.Terrain then
+		if donoclip == true then
+			obj.CanCollide = false
+		else
+			obj.CanCollide = true
+		end
 	end
 end)
 
