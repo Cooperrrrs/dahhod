@@ -170,11 +170,6 @@ function killnbring(target, acc)
 		if isUpdating then
 			isUpdating = false
 			if updateConnection then
- 				for i, v in pairs(Workspace[playerHRP]:GetChildren()) do
-			                if v:IsA("BasePart") then
-			                   v.CanCollide = false
-					end
-			        end
 				updateConnection:Disconnect()
 				updateConnection = nil
 			end
@@ -633,27 +628,31 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
 	end
 end)
 
-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Touched:connect(function(obj)
+local function onPartTouched(obj)
 	if obj ~= workspace.Terrain then
-		if donoclip == true then
-			obj.CanCollide = false
-		else
+		-- Check if the touched part is the feet
+		local partName = obj.Name
+		if partName == "LeftFoot" or partName == "RightFoot" then
 			obj.CanCollide = true
+		else
+			obj.CanCollide = not donoclip
 		end
 	end
-end)
+end
 
-game:GetService("Players").LocalPlayer.Character.RightFoot.Touched:connect(function(obj)
-	if obj ~= workspace.Terrain then
-		obj.CanCollide = true
+local function connectTouchedEvent(part)
+	if part:IsA("BasePart") then
+		part.Touched:Connect(onPartTouched)
 	end
-end)
+end
 
-game:GetService("Players").LocalPlayer.Character.LeftFoot.Touched:connect(function(obj)
-	if obj ~= workspace.Terrain then
-		obj.CanCollide = true
-	end
-end)
+
+for _, part in ipairs(player.Character:GetDescendants()) do
+	connectTouchedEvent(part)
+end
+
+
+player.Character.DescendantAdded:Connect(connectTouchedEvent)
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
