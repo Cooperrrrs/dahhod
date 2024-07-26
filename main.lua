@@ -124,7 +124,7 @@ function killnbring(target, acc)
 	local host = Players:FindFirstChild(_G.host)
 	if acc ~= player.Name then return end
 
-	chat("Hey ive come to get you please do not run!")
+	chat(_G.Pickup)
 
 	local RTARGET = game.Players:WaitForChild(target)
 
@@ -248,7 +248,7 @@ function tphost(target, acc)
 	local host = Players:FindFirstChild(_G.host)
 	print(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
-	chat("Hey ive come to get you please do not run!")
+	chat(_G.Pickup)
 	local RTARGET = game.Players:WaitForChild(target)
 	print("TARGET IS CALLED: "..RTARGET.Name)
 	local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
@@ -333,7 +333,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 	local host = Players:FindFirstChild(_G.host)
 	if botgoing ~= player.Name then return end
 
-	chat("Hey ive come to get you please do not run!")
+	chat(_G.Pickup)
 
 	local TPTARGET = game.Players:WaitForChild(plrtobring)
 	local BTARGET = game.Players:WaitForChild(plrtogoto)
@@ -496,7 +496,7 @@ end
 
 
 function cmds()
-	chat("Bring, drop, tp, tph, tpo, ss, msg, hide, unhide")
+	chat("Bring, drop, tp, tph, tpo, ss, msg, hide, unhide, kick")
 end
 
 
@@ -512,7 +512,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 
 		print("Found host")
 		if string.lower(message) == "bring" then
-			chat("Returning back to weareout!")
+			chat("Returning back to ".._G.host.."!")
 			brings()
 		elseif string.lower(message) == "drop true" then
 			if string.find(player.DisplayName, "BodyGuard") then return end
@@ -532,7 +532,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 			local command, restOfMessage = message:match("^(%S+)%s+(.+)$")
 			chat(restOfMessage)
 		elseif string.lower(message) == "bring small" then
-			chat("Returning back to weareout!")
+			chat("Returning back to ".._G.host.."!")
 			bringsmall()
 		elseif string.lower(part1) == "tp" then
 			for _, Player in pairs(Players:GetPlayers()) do
@@ -551,7 +551,7 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 			killnbring(targetname, botname)
 
 		elseif string.lower(part1) == "ss" then
-			chat("Returning back to weareout!")
+			chat("Returning back to ".._G.host.."!")
 			for _,Player in pairs(Players:GetPlayers()) do
 				if Player.Name:find(splitMessage) or  Player.DisplayName:find(splitMessage) then
 					stop(Player.Name)
@@ -614,6 +614,12 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 			tpo(plrtobring, plrtogoto, botgoing)
 		elseif string.lower(message) == "cmds" then
 			cmds()
+		elseif string.lower(part1) == "kick" then
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[2]) or Player.DisplayName:find(parts[2]) then
+					Player:Kick("The host has requested to kick you")
+				end
+			end
 		end
 	end
 end)
