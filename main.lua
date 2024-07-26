@@ -238,9 +238,9 @@ function tphost(target, acc)
 	while true do
 		if host.Character.Humanoid.Health <= 4 then
 			wait(1)
-			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
 			wait(0.4)
-			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+			player.Character.HumanoidRootPart.CFrame = host.Character.Head.CFrame
 			print("OOGGAAA")
 			wait(0.4)
 			local args = {
