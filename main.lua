@@ -176,10 +176,10 @@ function killnbring(target, acc)
 			if RTARGET.Character.Humanoid.Health <= 4 then
 				stopUpdating()
 				wait(1)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
 				player.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 5, 0)
 				wait(0.4)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.Head.CFrame
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
 				wait(0.6)
 				local args = {
 					[1] = "Grabbing",
