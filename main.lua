@@ -184,10 +184,10 @@ function killnbring(target, acc)
 				wait(0.4)
 				player.Character.HumanoidRootPart.CFrame = player.Character.Head.CFrame
 				wait(0.5)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
 				wait(0.2)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
-				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
+				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
 					wait(0.3)
 					local args = {
@@ -208,7 +208,7 @@ function killnbring(target, acc)
 					targetname = nil
 					botname = nil
 				else
-					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
+					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
 					wait(0.3)
 					local args = {
 						[1] = "Grabbing",
@@ -268,10 +268,10 @@ function tphost(target, acc)
 	while true do
 		if host.Character.Humanoid.Health <= 4 then
 			wait(1)
-			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+			player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
 			wait(0.4)
-			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
-			local distance = (host.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+			player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
+			local distance = (host.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 			if distance <= 4 then
 				print("OOGGAAA")
 				wait(0.4)
@@ -282,7 +282,7 @@ function tphost(target, acc)
 
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame  * CFrame.new(0, 0, 0)
 				wait(0.3)
 				local args = {
 					[1] = "Grabbing",
@@ -293,7 +293,7 @@ function tphost(target, acc)
 				targetname = nil
 				botname = nil
 			else
-				player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+				player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
 				print("OOGGAAA")
 				wait(0.4)
 				local args = {
@@ -303,7 +303,7 @@ function tphost(target, acc)
 
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame  * CFrame.new(0, 0, 0)
 				wait(0.3)
 				local args = {
 					[1] = "Grabbing",
@@ -391,12 +391,12 @@ function tpo(plrtobring, plrtogoto, botgoing)
 			if TPTARGET.Character.Humanoid.Health <= 4 then
 				stopUpdating()
 				wait(0.4)
-				player.Character.HumanoidRootPart.CFrame = player.Character.Head.CFrame
+				player.Character.HumanoidRootPart.CFrame = player.Character.UpperTorso.CFrame
 				wait(0.5)
-				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
+				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
 				wait(0.2)
-				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
-				local distance = (host.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
+				local distance = (host.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
 					wait(0.3)
 					local args = {
@@ -418,7 +418,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 					plrtogoto = nil
 					botgoing = nil
 				else
-					player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.HumanoidRootPart.CFrame
+					player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
 					wait(0.3)
 					local args = {
 						[1] = "Grabbing",
