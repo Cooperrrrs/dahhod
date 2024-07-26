@@ -32,7 +32,7 @@ _G.codes = { -- codes for redeemding
 -- hide bot or All(hides the bots)
 -- unhide bot or All  (un hides the bots)
 -- tpo plr plrtotp bot (teleports a player to another player)
--- kicks the bot
+-- kick botname (kicks the bot)
 -- cmds shows all cmds
 --]
 
