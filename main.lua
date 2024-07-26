@@ -244,7 +244,7 @@ function killnbring(target, acc)
 			else
 				print("clicking")
 				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-				wait(1)
+				wait(2)
 				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 			end
 		else
@@ -332,7 +332,7 @@ function tphost(target, acc)
 		else
 			print("clicking")
 			VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-			wait(1)
+			wait(2)
 			VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 		end
 	end
@@ -474,7 +474,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 			else
 				print("clicking")
 				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-				wait(1)
+				wait(2)
 				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 			end
 		else
