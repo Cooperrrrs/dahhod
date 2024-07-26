@@ -2,7 +2,6 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
 local player = Players.LocalPlayer
-local host = Players:FindFirstChild(_G.host)
 local players, replicatedStorage = game:GetService("Players"), game:GetService("ReplicatedStorage");
 local defaultChatSystemChatEvents = replicatedStorage:FindFirstChild("DefaultChatSystemChatEvents");
 local onMessageDoneFiltering = defaultChatSystemChatEvents:FindFirstChild("OnMessageDoneFiltering");
@@ -88,6 +87,7 @@ end
 
 function  brings()
 	print("startinmg function")
+	local host = Players:FindFirstChild(_G.host)
 	local playerfolder =  workspace:WaitForChild("Players")
 
 	for _, plr in pairs(playerfolder:GetChildren()) do
@@ -104,7 +104,7 @@ end
 
 function  bringsmall()
 	local playerfolder =  workspace:WaitForChild("Players")
-
+	local host = Players:FindFirstChild(_G.host)
 	for _, plr in pairs(playerfolder:GetChildren()) do
 		if plr.Name == host.Name then
 			for index, altName in pairs(ats) do
@@ -121,6 +121,7 @@ end
 
 function killnbring(target, acc)
 	wait(2)
+	local host = Players:FindFirstChild(_G.host)
 	if acc ~= player.Name then return end
 
 	chat("Hey ive come to get you please do not run!")
@@ -244,6 +245,7 @@ end
 
 function tphost(target, acc)
 	wait(2)
+	local host = Players:FindFirstChild(_G.host)
 	print(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
 	chat("Hey ive come to get you please do not run!")
@@ -328,6 +330,7 @@ end
 
 function tpo(plrtobring, plrtogoto, botgoing)
 	wait(2)
+	local host = Players:FindFirstChild(_G.host)
 	if botgoing ~= player.Name then return end
 
 	chat("Hey ive come to get you please do not run!")
@@ -461,6 +464,7 @@ end
 
 
 function stop(acc)
+	local host = Players:FindFirstChild(_G.host)
 	if acc ~= player.Name then return end
 	if isUpdating then
 		targetname = nil
@@ -498,6 +502,7 @@ end
 
 
 onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
+	local host = Players:FindFirstChild(_G.host)
 	local speaker, message = players[messageData.FromSpeaker], messageData.Message
 	if speaker == host then
 		local parts = string.split(message, " ")
