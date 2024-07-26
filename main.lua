@@ -183,7 +183,7 @@ function killnbring(target, acc)
 				wait(0.5)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
 				wait(0.2)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -5)
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
 				if distance <= 4 then
 					wait(0.3)
