@@ -143,7 +143,7 @@ function killnbring(target, acc)
 			local targetPredictedCFrame = getPredictedPosition(RTARGET)
 			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 				local playerHRP = player.Character.HumanoidRootPart
-				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0, 3, 0) -- Adjust the offset as needed
+				playerHRP.CFrame = targetPredictedCFrame
 				print(targetPredictedCFrame)
 			end
 		end
@@ -352,7 +352,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 			local targetPredictedCFrame = getPredictedPosition(TPTARGET)
 			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 				local playerHRP = player.Character.HumanoidRootPart
-				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0, 3, 0) -- Adjust the offset as needed
+				playerHRP.CFrame = targetPredictedCFrame
 				print(targetPredictedCFrame)
 			end
 		end
