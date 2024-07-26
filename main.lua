@@ -413,14 +413,10 @@ function unhide(acc)
 	end
 end
 
-local cmdst = {
-	"ss",
-	"ssss",
-	"Sssss",
-}
+
 
 function cmds()
-	chat(cmdst)
+	chat("Bring, drop, tp, tph, tpo, ss, msg, hide, unhide")
 end
 
 
