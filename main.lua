@@ -19,7 +19,7 @@ local botgoing = nil
 local ats = _G.alts
 local codes = _G.codes
 local hideplace = CFrame.new(342.968323, 21.7499905, 130.013672, 0.0817344561, 5.39478862e-08, 0.996654153, 7.82229215e-09, 1, -5.47704921e-08, -0.996654153, 1.22727561e-08, 0.0817344561)
-local donoclip = false
+
 
 
 
@@ -120,7 +120,6 @@ end
 
 
 function killnbring(target, acc)
-	donoclip = true
 	wait(2)
 	if acc ~= player.Name then return end
 
@@ -133,7 +132,7 @@ function killnbring(target, acc)
 		if not targetHRP then return nil end
 
 		local targetVelocity = targetHRP.Velocity
-		local predictionTime = 0.3
+		local predictionTime = 0.2
 		local predictedPosition = targetHRP.Position + targetVelocity * predictionTime
 
 		return CFrame.new(predictedPosition)
@@ -148,7 +147,7 @@ function killnbring(target, acc)
 			local targetPredictedCFrame = getPredictedPosition(RTARGET)
 			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 				local playerHRP = player.Character.HumanoidRootPart
-				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,-3,0)
+				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,3,0)
 			end
 		end
 	end
@@ -187,7 +186,7 @@ function killnbring(target, acc)
 				wait(0.5)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
 				wait(0.2)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame * CFrame.new(0, -1, 0)
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.HumanoidRootPart.CFrame
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
 				if distance <= 4 then
 					wait(0.3)
@@ -229,7 +228,6 @@ function killnbring(target, acc)
 					targetname = nil
 					botname = nil
 				end
-				donoclip = false
 				break
 			else
 				print("clicking")
@@ -245,7 +243,6 @@ end
 
 
 function tphost(target, acc)
-	donoclip = true
 	wait(2)
 	print(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
@@ -317,7 +314,7 @@ function tphost(target, acc)
 				targetname = nil
 				botname = nil
 			end
-			donoclip = false
+
 			break
 		else
 			print("clicking")
@@ -330,7 +327,6 @@ end
 
 
 function tpo(plrtobring, plrtogoto, botgoing)
-	donoclip = true
 	wait(2)
 	if botgoing ~= player.Name then return end
 
@@ -447,7 +443,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				chat("Here is the person you requested!")
 				wait(1.5)
 				player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-				donoclip = false
+
 				break
 			else
 				print("clicking")
@@ -628,31 +624,6 @@ game.Players.LocalPlayer.CharacterAdded:Connect(function(character)
 	end
 end)
 
-local function onPartTouched(obj)
-	if obj ~= workspace.Terrain then
-		-- Check if the touched part is the feet
-		local partName = obj.Name
-		if partName == "LeftFoot" or partName == "RightFoot" then
-			obj.CanCollide = true
-		else
-			obj.CanCollide = not donoclip
-		end
-	end
-end
-
-local function connectTouchedEvent(part)
-	if part:IsA("BasePart") then
-		part.Touched:Connect(onPartTouched)
-	end
-end
-
-
-for _, part in ipairs(player.Character:GetDescendants()) do
-	connectTouchedEvent(part)
-end
-
-
-player.Character.DescendantAdded:Connect(connectTouchedEvent)
 
 local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
