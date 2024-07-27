@@ -654,10 +654,10 @@ function tpgun(target, acc)
 		end
 	end
 
-	local ammoValue = game.Players.LocalPlayer.Character:WaitForChild("[SilencerAR]"):WaitForChild("Ammo")
-
+	
 	-- Function to handle the value change
 	local function onAmmoChanged()
+		local ammoValue = game.Players.LocalPlayer.Character:WaitForChild("[SilencerAR]"):WaitForChild("Ammo")
 		print("Ammo value changed to: " .. ammoValue.Value)
 		if ammoValue.Value == 0 then
 			local args = {
