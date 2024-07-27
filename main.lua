@@ -701,8 +701,9 @@ function tpgun(target, acc)
 					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = buyAmmo
 					for i = 1, 2 do
 						fireclickdetector(game.Workspace.Ignored.Shop["120 [SilencerAR Ammo] - $80"].ClickDetector)
+						wait(2)
 					end
-					wait(0.2)
+					wait(1.2)
 					local cc2 = game.Players.LocalPlayer.Backpack:FindFirstChild("[SilencerAR]")
 					cc2.Parent = game.Players.LocalPlayer.Character
 				end
@@ -791,6 +792,7 @@ function tpgun(target, acc)
 					wait(5)
 					VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 				end)
+				wait(2)
 			end
 		else
 			break
