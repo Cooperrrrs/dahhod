@@ -651,6 +651,10 @@ function tpgun(target, acc)
 			plrtobring = nil
 			plrtogoto = nil
 			botgoing = nil
+			Environment.Locked = nil
+				for _, v in pairs(ServiceConnections) do
+					v:Disconnect()
+				end
 		end
 	end
 
