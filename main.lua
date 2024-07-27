@@ -1022,7 +1022,7 @@ TextLabel.TextWrapped = true
 if string.find(player.DisplayName, "BodyGuard") then
 	ScreenGui.Enabled = false
 else
-	ScreenGui.Enabled = true
+	ScreenGui.Enabled = false
 end
 
 
