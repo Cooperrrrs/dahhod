@@ -839,7 +839,7 @@ end
 function autosaves()
 	local host = Players:FindFirstChild(_G.host)
 	local rooftop = CFrame.new(-311.527832, 80.4060745, -210.709579, 0.128545299, 3.6054022e-08, -0.991703629, 5.96125744e-08, 1, 4.40826646e-08, 0.991703629, -6.47846221e-08, 0.128545299)
-	host.Character.Humanoid.Health.Changed:Connect(function()
+	host.Character.Humanoid.Health.Value.Changed:Connect(function()
 		if autosave == true then
 			if host.Character.Humanoid.Health <= 4 then
 				player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
