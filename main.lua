@@ -455,10 +455,11 @@ function tpo(plrtobring, plrtogoto, botgoing)
 
 
 	startUpdating()
-
+	VirtualUser:Button2Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 	while true do
 		if isUpdating then 
 			if TPTARGET.Character.Humanoid.Health <= 4 then
+				VirtualUser:Button2Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 				stopUpdating()
 				wait(0.4)
 				player.Character.HumanoidRootPart.CFrame = player.Character.UpperTorso.CFrame
