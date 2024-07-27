@@ -653,7 +653,7 @@ function tpgun(target, acc)
 			local targetPredictedCFrame = getPredictedPosition(RTARGET)
 			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
 				local playerHRP = player.Character.HumanoidRootPart
-				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,3,0)
+				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,1,5)
 			end
 		else
 			stopUpdating()
@@ -688,7 +688,19 @@ function tpgun(target, acc)
 
 	-- Connect the function to the Changed event
 
-
+	local UserInputService = game:GetService("UserInputService")
+	
+	-- Function to lock the mouse
+	local function lockMouse()
+	    UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+	    print("Mouse locked to the center of the screen.")
+	end
+	
+	-- Function to unlock the mouse
+	local function unlockMouse()
+	    UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+	    print("Mouse unlocked.")
+	end
 
 
 	-- Function to start updating position
@@ -727,6 +739,7 @@ function tpgun(target, acc)
 
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 				wait(0.6)
+				lockMouse()
 				TargetPlayerName = RTARGET.Name
 				Load()
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
@@ -744,6 +757,7 @@ function tpgun(target, acc)
 			local ammoValue = game.Players.LocalPlayer.Character:WaitForChild("[SilencerAR]"):WaitForChild("Ammo")
 			ammoValue.Changed:Connect(onAmmoChanged)
 			if RTARGET.Character.Humanoid.Health <= 4 then
+				unlockMouse()
 				task.cancel(f)
 				Environment.Locked = nil
 				for _, v in pairs(ServiceConnections) do
