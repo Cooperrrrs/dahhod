@@ -206,7 +206,6 @@ function killnbring(target, acc)
 					cc.Parent = game.Players.LocalPlayer.Character
 				else
 				end
-				cc.Parent = game.Players.LocalPlayer.Character
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
 			end
 		end
