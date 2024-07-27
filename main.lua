@@ -746,6 +746,8 @@ function tpgun(target, acc)
 			local ammoValue = game.Players.LocalPlayer.Character:WaitForChild("[SilencerAR]"):WaitForChild("Ammo")
 			ammoValue.Changed:Connect(onAmmoChanged)
 			if RTARGET.Character.Humanoid.Health <= 4 then
+				local cc = game.Players.LocalPlayer.Character:FindFirstChild("[SilencerAR]")
+				cc.Parent = game.Players.LocalPlayer.Backpack
 				unlockMouse()
 				task.cancel(f)
 				Environment.Locked = nil
