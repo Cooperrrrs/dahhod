@@ -110,7 +110,7 @@ function  brings()
 	local playerfolder =  workspace:WaitForChild("Players")
 
 	for _, plr in pairs(playerfolder:GetChildren()) do
-		if plr.Name ~= host.Name then
+		if plr.Name == host.Name then
 			for index, altName in pairs(ats) do
 				local altPlayer = game.Players:FindFirstChild(altName)
 				if altPlayer and altPlayer.Character and altPlayer.Character:FindFirstChild("HumanoidRootPart") then
