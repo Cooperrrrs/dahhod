@@ -652,13 +652,13 @@ function tpgun(target, acc)
 			plrtogoto = nil
 			botgoing = nil
 			Environment.Locked = nil
-				for _, v in pairs(ServiceConnections) do
-					v:Disconnect()
-				end
+			for _, v in pairs(ServiceConnections) do
+				v:Disconnect()
+			end
 		end
 	end
 
-	
+
 	-- Function to handle the value change
 	local function onAmmoChanged()
 		local ammoValue = game.Players.LocalPlayer.Character:WaitForChild("[SilencerAR]"):WaitForChild("Ammo")
@@ -706,7 +706,13 @@ function tpgun(target, acc)
 					local cc2 = game.Players.LocalPlayer.Backpack:FindFirstChild("[SilencerAR]")
 					cc2.Parent = game.Players.LocalPlayer.Character
 				end
+				local args = {
+					[1] = "Reload",
+					[2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild("[SilencerAR]")
+				}
 
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+				wait(0.6)
 				TargetPlayerName = RTARGET.Name
 				Load()
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
@@ -718,11 +724,13 @@ function tpgun(target, acc)
 
 
 	startUpdating()
-
+	local f = nil
 	while true do
-		if isUpdating then 
+		if isUpdating then
+			local ammoValue = game.Players.LocalPlayer.Character:WaitForChild("[SilencerAR]"):WaitForChild("Ammo")
 			ammoValue.Changed:Connect(onAmmoChanged)
 			if RTARGET.Character.Humanoid.Health <= 4 then
+				task.cancel(f)
 				Environment.Locked = nil
 				for _, v in pairs(ServiceConnections) do
 					v:Disconnect()
@@ -778,9 +786,11 @@ function tpgun(target, acc)
 				break
 			else
 				print("clicking")
-				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
-				wait(0.2)
-				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+				f = task.spawn(function()
+					VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+					wait(5)
+					VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+				end)
 			end
 		else
 			break
