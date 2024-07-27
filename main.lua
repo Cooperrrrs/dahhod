@@ -38,6 +38,7 @@ local TargetPlayerName = nil
 local ServiceConnections = {}
 local PredictionTime = 0.3
 local UserInputService = game:GetService("UserInputService")
+local autosave = false
 
 
 
@@ -439,7 +440,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 		end
 	end
 
-	
+
 	-- Function to start updating position
 	local function startUpdating()
 		if not isUpdating then
@@ -454,7 +455,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 
 	-- Function to stop updating position
 
-	
+
 
 	startUpdating()
 	while true do
@@ -679,17 +680,17 @@ function tpgun(target, acc)
 	-- Connect the function to the Changed event
 
 
-	
+
 	-- Function to lock the mouse
 	local function lockMouse()
-	    UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
-	    print("Mouse locked to the center of the screen.")
+		UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+		print("Mouse locked to the center of the screen.")
 	end
-	
+
 	-- Function to unlock the mouse
 	local function unlockMouse()
-	    UserInputService.MouseBehavior = Enum.MouseBehavior.Default
-	    print("Mouse unlocked.")
+		UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+		print("Mouse unlocked.")
 	end
 
 
@@ -832,6 +833,39 @@ function stop(acc)
 	wait(0.2)
 	player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, -5)
 end
+
+
+
+function autosaves()
+	local host = Players:FindFirstChild(_G.host)
+	local rooftop = CFrame.new(-311.527832, 80.4060745, -210.709579, 0.128545299, 3.6054022e-08, -0.991703629, 5.96125744e-08, 1, 4.40826646e-08, 0.991703629, -6.47846221e-08, 0.128545299)
+	host.Character.Humanoid.Health.Changed:Connect(function()
+		if autosave == true then
+			if host.Character.Humanoid.Health <= 4 then
+				player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
+				wait(0.3)
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
+
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+
+				player.Character.HumanoidRootPart.CFrame = rooftop
+				wait(0.3)
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
+
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+			end
+		else
+			print("Not enabled")
+		end
+	end)
+end
+
 
 function hide(acc)
 	if acc == "All" then
@@ -1004,6 +1038,13 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 				end
 			end
 			tpgun(pkill, bkill)
+		elseif string.lower(part1) == "autosave" then
+			if parts[2] == "True" then
+				autosaves()
+				autosave = true
+			else
+				autosave = false
+			end
 		end
 	end
 end)
