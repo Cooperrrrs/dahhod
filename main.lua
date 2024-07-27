@@ -1,3 +1,9 @@
+pcall(function()
+	if getgenv().Aimbot and getgenv().Aimbot.Functions and getgenv().Aimbot.Functions.Exit then
+		getgenv().Aimbot.Functions:Exit()
+	end
+end)
+
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local workspace = game:GetService("Workspace")
@@ -15,10 +21,22 @@ local drop = nil
 local plrtobring = nil
 local plrtogoto = nil
 local botgoing = nil
+local bkill = nil
+local pkill = nil
 local ats = _G.alts
 local codes = _G.codes
 local hideplace = CFrame.new(342.968323, 21.7499905, 130.013672, 0.0817344561, 5.39478862e-08, 0.996654153, 7.82229215e-09, 1, -5.47704921e-08, -0.996654153, 1.22727561e-08, 0.0817344561)
-
+local buyAR = CFrame.new(490.781281, 48.0704956, -633.840515, 0.998062134, -6.59853505e-10, 0.062225379, 2.78090906e-09, 1, -3.40000561e-08, -0.062225379, 3.41072131e-08, 0.998062134)
+local buyAmmo = CFrame.new(496.255707, 48.6713295, -634.311401, 0.977370262, -3.59791485e-08, -0.211535782, 4.6179089e-08, 1, 4.32783445e-08, 0.211535782, -5.20674952e-08, 0.977370262)
+getgenv().Aimbot = {}
+local Environment = getgenv().Aimbot
+local RunService = game:GetService("RunService")
+local Players = game:GetService("Players")
+local Camera = game:GetService("Workspace").CurrentCamera
+local LocalPlayer = Players.LocalPlayer
+local TargetPlayerName = nil
+local ServiceConnections = {}
+local PredictionTime = 0.3
 
 
 
@@ -143,7 +161,7 @@ function killnbring(target, acc)
 
 		return CFrame.new(predictedPosition)
 	end
-	
+
 	local function stopUpdating()
 		if isUpdating then
 			isUpdating = false
@@ -153,7 +171,7 @@ function killnbring(target, acc)
 			end
 		end
 	end
-	
+
 	-- Function to update position
 	local function updatePosition()
 		wait(0.001)
@@ -170,7 +188,7 @@ function killnbring(target, acc)
 			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
 			chat("User has left or not found!")
 			wait(2)
-			
+
 			plrtobring = nil
 			plrtogoto = nil
 			botgoing = nil
@@ -257,6 +275,12 @@ function killnbring(target, acc)
 		end
 	end
 end
+
+
+
+
+
+
 
 
 function tphost(target, acc)
@@ -379,7 +403,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 
 		return CFrame.new(predictedPosition)
 	end
-	
+
 	local function stopUpdating()
 		if isUpdating then
 			isUpdating = false
@@ -390,7 +414,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 			end
 		end
 	end
-	
+
 	-- Function to update position
 	local function updatePosition()
 		wait(0.001)
@@ -495,6 +519,263 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				print("clicking")
 				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 				wait(2)
+				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+			end
+		else
+			break
+		end
+	end
+end
+
+
+function tpgun(target, acc)
+	wait(2)
+	local host = Players:FindFirstChild(_G.host)
+	if acc ~= player.Name then return end
+
+	chat(_G.Pickup)
+
+	local RTARGET = game.Players:WaitForChild(target)
+	if RTARGET == nil then
+		chat("Player isnt found!")
+		return
+	else
+	end
+
+
+	--// Core Functions
+
+	local function LockOnTargetPlayer()
+		for _, player in pairs(Players:GetPlayers()) do
+			if player.Name == TargetPlayerName then
+				if player.Character and player.Character:FindFirstChild("Head") and player.Character:FindFirstChildOfClass("Humanoid") then
+					Environment.Locked = player
+					break
+				end
+			end
+		end
+	end
+
+	local function UnlockOnDeath()
+		if Environment.Locked and Environment.Locked.Character and Environment.Locked.Character:FindFirstChildOfClass("Humanoid") then
+			if Environment.Locked.Character:FindFirstChildOfClass("Humanoid").Health <= 0 then
+				Environment.Locked = nil
+			end
+		end
+	end
+
+	local function GetPredictedPosition()
+		if Environment.Locked and Environment.Locked.Character and Environment.Locked.Character:FindFirstChild("Head") then
+			local head = Environment.Locked.Character.Head
+			if head and head:IsA("BasePart") then
+				local velocity = head.Velocity
+				if velocity then
+					return head.Position + (velocity * PredictionTime)
+				end
+			end
+		end
+		return nil
+	end
+
+	--// Load
+
+	local function Load()
+		ServiceConnections.RenderSteppedConnection = RunService.RenderStepped:Connect(function()
+			if not Environment.Locked then
+				LockOnTargetPlayer()
+			else
+				UnlockOnDeath()
+				if Environment.Locked then
+					local predictedPosition = GetPredictedPosition()
+					if predictedPosition then
+						Camera.CFrame = CFrame.new(Camera.CFrame.Position, predictedPosition)
+					end
+				end
+			end
+		end)
+	end
+
+	--// Functions
+
+	Environment.Functions = {}
+
+	function Environment.Functions:Exit()
+		for _, v in pairs(ServiceConnections) do
+			v:Disconnect()
+		end
+		getgenv().Aimbot.Functions = nil
+		getgenv().Aimbot = nil
+	end
+
+
+
+
+	local function getPredictedPosition(target)
+		local targetHRP = RTARGET.Character:FindFirstChild("HumanoidRootPart")
+		if not targetHRP then return nil end
+
+		local targetVelocity = targetHRP.Velocity
+		local predictionTime = 0.2
+		local predictedPosition = targetHRP.Position + targetVelocity * predictionTime
+
+		return CFrame.new(predictedPosition)
+	end
+
+	local function stopUpdating()
+		if isUpdating then
+			isUpdating = false
+			if updateConnection then
+				updateConnection:Disconnect()
+				updateConnection = nil
+			end
+		end
+	end
+
+	-- Function to update position
+	local function updatePosition()
+		wait(0.001)
+		if not isUpdating then return end  -- Only update if isUpdating is true
+
+		if RTARGET and RTARGET.Character and RTARGET.Character:FindFirstChild("HumanoidRootPart") then
+			local targetPredictedCFrame = getPredictedPosition(RTARGET)
+			if targetPredictedCFrame and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+				local playerHRP = player.Character.HumanoidRootPart
+				playerHRP.CFrame = targetPredictedCFrame * CFrame.new(0,3,0)
+			end
+		else
+			stopUpdating()
+			player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+			chat("User has left or not found!")
+			wait(2)
+
+			plrtobring = nil
+			plrtogoto = nil
+			botgoing = nil
+		end
+	end
+
+	local ammoValue = game.Players.LocalPlayer.Character:WaitForChild("[SilencerAR]"):WaitForChild("Ammo")
+
+	-- Function to handle the value change
+	local function onAmmoChanged()
+		print("Ammo value changed to: " .. ammoValue.Value)
+		if ammoValue.Value == 0 then
+			local args = {
+				[1] = "Reload",
+				[2] = game:GetService("Players").LocalPlayer.Character:FindFirstChild("[SilencerAR]")
+			}
+
+			game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+		end
+	end
+
+	-- Connect the function to the Changed event
+
+
+
+
+	-- Function to start updating position
+	local function startUpdating()
+		if not isUpdating then
+			isUpdating = true
+			if not updateConnection then
+				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("[SilencerAR]")
+				if cc then
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = buyAmmo
+					for i = 1, 2 do
+						wait(2)
+						fireclickdetector(game.Workspace.Ignored.Shop["120 [SilencerAR Ammo] - $80"].ClickDetector)
+					end
+					cc.Parent = game.Players.LocalPlayer.Character
+				else
+
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = buyAR
+					wait(3)
+					fireclickdetector(game.Workspace.Ignored.Shop["[SilencerAR] - $1326"].ClickDetector)
+					wait(0.2)
+
+					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = buyAmmo
+					for i = 1, 2 do
+						fireclickdetector(game.Workspace.Ignored.Shop["120 [SilencerAR Ammo] - $80"].ClickDetector)
+					end
+					wait(0.2)
+					local cc2 = game.Players.LocalPlayer.Backpack:FindFirstChild("[SilencerAR]")
+					cc2.Parent = game.Players.LocalPlayer.Character
+				end
+
+				TargetPlayerName = RTARGET.Name
+				Load()
+				updateConnection = RunService.RenderStepped:Connect(updatePosition)
+			end
+		end
+	end
+
+	-- Function to stop updating position
+
+
+	startUpdating()
+
+	while true do
+		if isUpdating then 
+			ammoValue.Changed:Connect(onAmmoChanged)
+			if RTARGET.Character.Humanoid.Health <= 4 then
+				Environment.Locked = nil
+				for _, v in pairs(ServiceConnections) do
+					v:Disconnect()
+				end
+				stopUpdating()
+				wait(0.4)
+				player.Character.HumanoidRootPart.CFrame = player.Character.Head.CFrame
+				wait(0.5)
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
+				wait(0.2)
+				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
+				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
+				if distance <= 4 then
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+
+					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+					targetname = nil
+					botname = nil
+				else
+					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+
+					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
+					wait(0.3)
+					local args = {
+						[1] = "Grabbing",
+						[2] = false
+					}
+
+					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+					targetname = nil
+					botname = nil
+				end
+				break
+			else
+				print("clicking")
+				VirtualUser:Button1Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+				wait(0.2)
 				VirtualUser:Button1Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 			end
 		else
@@ -676,6 +957,19 @@ onMessageDoneFiltering.OnClientEvent:Connect(function(messageData)
 					rejoin()
 				end
 			end
+		elseif string.lower(part1) == "tpg" then
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[2]) or Player.DisplayName:find(parts[2]) then
+					pkill = Player.Name
+				end
+			end
+
+			for _, Player in pairs(Players:GetPlayers()) do
+				if Player.Name:find(parts[3]) or Player.DisplayName:find(parts[3]) then
+					bkill = Player.Name
+				end
+			end
+			tpgun(pkill, bkill)
 		end
 	end
 end)
@@ -730,3 +1024,6 @@ if string.find(player.DisplayName, "BodyGuard") then
 else
 	ScreenGui.Enabled = true
 end
+
+
+
