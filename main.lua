@@ -37,7 +37,7 @@ local LocalPlayer = Players.LocalPlayer
 local TargetPlayerName = nil
 local ServiceConnections = {}
 local PredictionTime = 0.3
-
+local UserInputService = game:GetService("UserInputService")
 
 
 
@@ -439,6 +439,11 @@ function tpo(plrtobring, plrtogoto, botgoing)
 		end
 	end
 
+	local function lockMouse()
+	    UserInputService.MouseBehavior = Enum.MouseBehavior.LockCenter
+	    print("Mouse locked to the center of the screen.")
+	end
+	
 	-- Function to start updating position
 	local function startUpdating()
 		if not isUpdating then
@@ -446,6 +451,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 			if not updateConnection then
 				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
 				cc.Parent = game.Players.LocalPlayer.Character
+				lockMouse()
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
 			end
 		end
@@ -453,13 +459,19 @@ function tpo(plrtobring, plrtogoto, botgoing)
 
 	-- Function to stop updating position
 
-
+	
+	-- Function to unlock the mouse
+	local function unlockMouse()
+	    UserInputService.MouseBehavior = Enum.MouseBehavior.Default
+	    print("Mouse unlocked.")
+	end
 	startUpdating()
-	VirtualUser:Button2Down(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
 	while true do
 		if isUpdating then 
 			if TPTARGET.Character.Humanoid.Health <= 4 then
-				VirtualUser:Button2Up(Vector2.new(0, 0), game:GetService("Workspace").CurrentCamera.CFrame)
+				local cc = game.Players.LocalPlayer.Character:FindFirstChild("Combat")
+				cc.Parent = game.Players.LocalPlayer.Backpack
+				unlockMouse()
 				stopUpdating()
 				wait(0.4)
 				player.Character.HumanoidRootPart.CFrame = player.Character.UpperTorso.CFrame
