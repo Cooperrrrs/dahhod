@@ -688,7 +688,7 @@ function tpgun(target, acc)
 
 	-- Connect the function to the Changed event
 
-	local UserInputService = game:GetService("UserInputService")
+
 	
 	-- Function to lock the mouse
 	local function lockMouse()
@@ -739,7 +739,6 @@ function tpgun(target, acc)
 
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 				wait(0.6)
-				lockMouse()
 				TargetPlayerName = RTARGET.Name
 				Load()
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
@@ -749,7 +748,7 @@ function tpgun(target, acc)
 
 	-- Function to stop updating position
 
-
+	lockMouse()
 	startUpdating()
 	local f = nil
 	while true do
