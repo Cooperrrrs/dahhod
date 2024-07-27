@@ -201,7 +201,11 @@ function killnbring(target, acc)
 		if not isUpdating then
 			isUpdating = true
 			if not updateConnection then
-				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+				if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then
+					local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+					cc.Parent = game.Players.LocalPlayer.Character
+				else
+				end
 				cc.Parent = game.Players.LocalPlayer.Character
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
 			end
@@ -297,8 +301,11 @@ function tphost(target, acc)
 	else
 	end
 	print("TARGET IS CALLED: "..RTARGET.Name)
-	local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
-	cc.Parent = game.Players.LocalPlayer.Character
+	if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then
+		local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+		cc.Parent = game.Players.LocalPlayer.Character
+	else
+	end
 
 	-- Function to update position
 	local function updatePosition()
@@ -446,8 +453,11 @@ function tpo(plrtobring, plrtogoto, botgoing)
 		if not isUpdating then
 			isUpdating = true
 			if not updateConnection then
-				local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
-				cc.Parent = game.Players.LocalPlayer.Character
+				if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then
+					local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
+					cc.Parent = game.Players.LocalPlayer.Character
+				else
+				end
 				updateConnection = RunService.RenderStepped:Connect(updatePosition)
 			end
 		end
