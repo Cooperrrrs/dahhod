@@ -837,33 +837,48 @@ end
 
 
 function autosaves()
-	local host = Players:FindFirstChild(_G.host)
-	local rooftop = CFrame.new(-311.527832, 80.4060745, -210.709579, 0.128545299, 3.6054022e-08, -0.991703629, 5.96125744e-08, 1, 4.40826646e-08, 0.991703629, -6.47846221e-08, 0.128545299)
-	host.Character.Humanoid.Health.Value.Changed:Connect(function()
-		if autosave == true then
-			if host.Character.Humanoid.Health <= 4 then
-				player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
-				wait(0.3)
-				local args = {
-					[1] = "Grabbing",
-					[2] = false
-				}
+    local Players = game:GetService("Players")
+    local host = Players:FindFirstChild(_G.host)
 
-				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+    if not host then
+        warn("Host not found")
+        return
+    end
 
-				player.Character.HumanoidRootPart.CFrame = rooftop
-				wait(0.3)
-				local args = {
-					[1] = "Grabbing",
-					[2] = false
-				}
+    local character = host.Character or host.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
 
-				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-			end
-		else
-			print("Not enabled")
-		end
-	end)
+    if not humanoid then
+        warn("Humanoid not found in host's character")
+        return
+    end
+
+    local rooftop = CFrame.new(-311.527832, 80.4060745, -210.709579, 0.128545299, 3.6054022e-08, -0.991703629, 5.96125744e-08, 1, 4.40826646e-08, 0.991703629, -6.47846221e-08, 0.128545299)
+    humanoid.HealthChanged:Connect(function()
+        if autosave == true then
+            if host.Character.Humanoid.Health <= 4 then
+                local player = Players.LocalPlayer
+                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+                    player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
+                    wait(0.3)
+                    local args = {
+                        [1] = "Grabbing",
+                        [2] = false
+                    }
+
+                    game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+
+                    player.Character.HumanoidRootPart.CFrame = rooftop
+                    wait(0.3)
+                    game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+                else
+                    warn("Player or Player's HumanoidRootPart not found")
+                end
+            end
+        else
+            print("Not enabled")
+        end
+    end)
 end
 
 
