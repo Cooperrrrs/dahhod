@@ -881,6 +881,7 @@ function autosaves()
                     player.Character.HumanoidRootPart.CFrame = rooftop
                     wait(0.3)
                     game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+		    wait(4)
                 else
                     warn("Player or Player's HumanoidRootPart not found")
                 end
