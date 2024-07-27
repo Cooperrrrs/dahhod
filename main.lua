@@ -229,7 +229,7 @@ function killnbring(target, acc)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -238,7 +238,7 @@ function killnbring(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -249,7 +249,7 @@ function killnbring(target, acc)
 					botname = nil
 				else
 					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -258,7 +258,7 @@ function killnbring(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -329,7 +329,7 @@ function tphost(target, acc)
 			local distance = (host.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 			if distance <= 4 then
 				print("OOGGAAA")
-				wait(0.4)
+				wait(0.7)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -338,7 +338,7 @@ function tphost(target, acc)
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame  * CFrame.new(0, 0, 0)
-				wait(0.3)
+				wait(0.7)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -350,7 +350,7 @@ function tphost(target, acc)
 			else
 				player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
 				print("OOGGAAA")
-				wait(0.4)
+				wait(0.7)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -359,7 +359,7 @@ function tphost(target, acc)
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame  * CFrame.new(0, 0, 0)
-				wait(0.3)
+				wait(0.7)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -482,7 +482,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
 				local distance = (host.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -491,7 +491,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -503,7 +503,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 					botgoing = nil
 				else
 					player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -512,7 +512,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -774,7 +774,7 @@ function tpgun(target, acc)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -783,7 +783,7 @@ function tpgun(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -794,7 +794,7 @@ function tpgun(target, acc)
 					botname = nil
 				else
 					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -803,7 +803,7 @@ function tpgun(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.3)
+					wait(0.7)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -870,7 +870,7 @@ function autosaves()
                 local player = Players.LocalPlayer
                 if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
                     player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
-                    wait(0.3)
+                    wait(0.7)
                     local args = {
                         [1] = "Grabbing",
                         [2] = false
@@ -879,9 +879,8 @@ function autosaves()
                     game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
                     player.Character.HumanoidRootPart.CFrame = rooftop
-                    wait(0.3)
+                    wait(0.8)
                     game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
-		    wait(4)
                 else
                     warn("Player or Player's HumanoidRootPart not found")
                 end
