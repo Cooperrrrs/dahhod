@@ -887,23 +887,22 @@ function autosaves()
     end
 
     local rooftop = CFrame.new(-311.527832, 80.4060745, -210.709579, 0.128545299, 3.6054022e-08, -0.991703629, 5.96125744e-08, 1, 4.40826646e-08, 0.991703629, -6.47846221e-08, 0.128545299)
+    
     humanoid.HealthChanged:Connect(function()
         if autosave == true and tpinghost == false then
             if host.Character.Humanoid.Health <= 4 then
                 local player = Players.LocalPlayer
-                if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-			print("SIGMA")
-		        local targetPosition = host.Character.UpperTorso.CFrame.Position
-		        
-		        -- Set the player's UpperTorso to the target position but keep it upright
-		        local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
-		        
-		        -- Optionally, adjust the height to match the standing height
-		        local adjustedPosition = targetPosition + Vector3.new(0, player.Character.UpperTorso.Size.Y/2, 0)
-		        newCFrame = CFrame.new(adjustedPosition) * CFrame.Angles(0, 0, 0)
-		
-		        -- Set the player's UpperTorso to the new CFrame
-		        player.Character.UpperTorso.CFrame = newCFrame
+                if player and player.Character and player.Character:FindFirstChild("UpperTorso") then
+                    print("SIGMA")
+                    local targetPosition = host.Character.UpperTorso.CFrame.Position
+                    
+                    -- Optionally, adjust the height to match the standing height
+                    local adjustedPosition = targetPosition + Vector3.new(0, player.Character.UpperTorso.Size.Y/2, 0)
+                    local newCFrame = CFrame.new(adjustedPosition)
+
+                    -- Set the player's UpperTorso to the new CFrame
+                    player.Character.UpperTorso.CFrame = newCFrame
+                    
                     wait(0.7)
                     local args = {
                         [1] = "Grabbing",
@@ -916,7 +915,7 @@ function autosaves()
                     wait(0.8)
                     game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
                 else
-                    warn("Player or Player's HumanoidRootPart not found")
+                    warn("Player or Player's UpperTorso not found")
                 end
             end
         else
@@ -924,6 +923,7 @@ function autosaves()
         end
     end)
 end
+
 
 
 function hide(acc)
