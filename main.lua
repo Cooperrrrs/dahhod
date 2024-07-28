@@ -892,6 +892,7 @@ function autosaves()
             if host.Character.Humanoid.Health <= 4 then
                 local player = Players.LocalPlayer
                 if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
+			print("SIGMA")
 		        local targetPosition = host.Character.UpperTorso.CFrame.Position
 		        
 		        -- Set the player's UpperTorso to the target position but keep it upright
