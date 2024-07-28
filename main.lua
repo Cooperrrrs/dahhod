@@ -899,7 +899,6 @@ function autosaves()
 
        			 -- Create a new CFrame for the player's UpperTorso at the target position with an upright orientation
         			local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
-				stopUpdating()
 				wait(0.4)
 				player.Character.UpperTorso.CFrame = newCFrame
                     
