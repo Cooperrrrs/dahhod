@@ -901,7 +901,7 @@ function autosaves()
                     local newCFrame = CFrame.new(adjustedPosition)
 
                     -- Set the player's UpperTorso to the new CFrame
-                    player.Character.UpperTorso.CFrame.Position = targetPosition + Vector3.new(0, player.Character.UpperTorso.Size.Y/2, 0)
+                    player.Character.UpperTorso.CFrame = newCFrame
                     
                     wait(0.7)
                     local args = {
