@@ -892,7 +892,7 @@ function autosaves()
             if host.Character.Humanoid.Health <= 4 then
                 local player = Players.LocalPlayer
                 if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-		           local targetPosition = RTARGET.Character.UpperTorso.CFrame.Position
+		        local targetPosition = host.Character.UpperTorso.CFrame.Position
 		        
 		        -- Set the player's UpperTorso to the target position but keep it upright
 		        local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
