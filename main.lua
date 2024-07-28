@@ -224,13 +224,15 @@ function killnbring(target, acc)
 	while true do
 		if isUpdating then 
 			if RTARGET.Character.Humanoid.Health <= 4 then
+				local targetCFrame = RTARGET.Character.UpperTorso.CFrame
+				local targetPosition = targetCFrame.Position
+
+       			 -- Create a new CFrame for the player's UpperTorso at the target position with an upright orientation
+        			local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
 				stopUpdating()
 				wait(0.4)
-				player.Character.HumanoidRootPart.CFrame = player.Character.Head.CFrame
-				wait(0.5)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
-				wait(0.2)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
+				player.Character.UpperTorso.CFrame = newCFrame
+				
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
 					wait(0.7)
