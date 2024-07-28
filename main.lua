@@ -713,19 +713,19 @@ function tpgun(target, acc)
 					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = buyAmmo
 					for i = 1, 2 do
 						wait(2)
-						--fireclickdetector(game.Workspace.Ignored.Shop["120 [SilencerAR Ammo] - $80"].ClickDetector)
+						fireclickdetector(game.Workspace.Ignored.Shop["120 [SilencerAR Ammo] - $80"].ClickDetector, 5)
 					end
 					cc.Parent = game.Players.LocalPlayer.Character
 				else
 
 					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = buyAR
 					wait(3)
-					fireclickdetector(game.Workspace.Ignored.Shop["[SilencerAR] - $1326"].ClickDetector)
+					fireclickdetector(game.Workspace.Ignored.Shop["[SilencerAR] - $1326"].ClickDetector, 5)
 					wait(0.2)
 
 					game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = buyAmmo
 					for i = 1, 2 do
-						--fireclickdetector(game.Workspace.Ignored.Shop["120 [SilencerAR Ammo] - $80"].ClickDetector)
+						fireclickdetector(game.Workspace.Ignored.Shop["120 [SilencerAR Ammo] - $80"].ClickDetector, 5)
 						wait(2)
 					end
 					wait(1.2)
