@@ -144,6 +144,11 @@ function killnbring(target, acc)
 	if acc ~= player.Name then return end
 
 	chat(_G.Pickup)
+	if target == nil or target == "" then
+	    print("Target is not defined or is an empty string!")
+	    return
+	end
+
 
 	local RTARGET = game.Players:WaitForChild(target)
 	if RTARGET == nil then
@@ -293,6 +298,11 @@ function tphost(target, acc)
 	print(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
 	chat(_G.Pickup)
+	if target == nil or target == "" then
+	    print("Target is not defined or is an empty string!")
+	    return
+	end
+
 	local RTARGET = game.Players:WaitForChild(target)
 	if game.Players:WaitForChild(target) then
 	else
@@ -386,6 +396,10 @@ function tpo(plrtobring, plrtogoto, botgoing)
 	if botgoing ~= player.Name then return end
 
 	chat(_G.Pickup)
+	if target == nil or target == "" then
+	    print("Target is not defined or is an empty string!")
+	    return
+	end
 
 	local TPTARGET = game.Players:WaitForChild(plrtobring)
 	if RTARGET == nil then
@@ -547,6 +561,11 @@ function tpgun(target, acc)
 	if acc ~= player.Name then return end
 
 	chat(_G.Pickup)
+	if target == nil or target == "" then
+	    print("Target is not defined or is an empty string!")
+	    return
+	end
+
 
 	local RTARGET = game.Players:WaitForChild(target)
 	if RTARGET == nil then
