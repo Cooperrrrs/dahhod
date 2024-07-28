@@ -894,10 +894,14 @@ function autosaves()
                 local player = Players.LocalPlayer
                 if player and player.Character and player.Character:FindFirstChild("UpperTorso") then
                     print("SIGMA")
-                    local targetPosition = host.Character.UpperTorso.CFrame
-			
-                    -- Set the player's UpperTorso to the new CFrame
-                    player.Character.UpperTorso.CFrame = targetPosition
+				local targetCFrame = host.Character.UpperTorso.CFrame
+				local targetPosition = targetCFrame.Position
+
+       			 -- Create a new CFrame for the player's UpperTorso at the target position with an upright orientation
+        			local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
+				stopUpdating()
+				wait(0.4)
+				player.Character.UpperTorso.CFrame = newCFrame
                     
                     wait(0.7)
                     local args = {
