@@ -894,14 +894,10 @@ function autosaves()
                 local player = Players.LocalPlayer
                 if player and player.Character and player.Character:FindFirstChild("UpperTorso") then
                     print("SIGMA")
-                    local targetPosition = host.Character.UpperTorso.CFrame.Position
-                    
-                    -- Optionally, adjust the height to match the standing height
-                    local adjustedPosition = targetPosition + Vector3.new(0, player.Character.UpperTorso.Size.Y/2, 0)
-                    local newCFrame = CFrame.new(adjustedPosition)
-
+                    local targetPosition = host.Character.UpperTorso.CFrame
+			
                     -- Set the player's UpperTorso to the new CFrame
-                    player.Character.UpperTorso.CFrame = newCFrame
+                    player.Character.UpperTorso.CFrame = targetPosition
                     
                     wait(0.7)
                     local args = {
