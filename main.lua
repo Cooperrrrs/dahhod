@@ -294,10 +294,10 @@ function tphost(target, acc)
 	if acc ~= player.Name then  print("NOT VALID") return end
 	chat(_G.Pickup)
 	local RTARGET = game.Players:WaitForChild(target)
-	if RTARGET == nil then
+	if game.Players:WaitForChild(target) then
+	else
 		chat("Player isnt found!")
 		return
-	else
 	end
 	print("TARGET IS CALLED: "..RTARGET.Name)
 	if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then
