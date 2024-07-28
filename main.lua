@@ -293,6 +293,7 @@ end
 
 
 
+local tpinghost = false
 
 function tphost(target, acc)
 	wait(2)
@@ -311,6 +312,7 @@ function tphost(target, acc)
 		chat("Player isnt found!")
 		return
 	end
+	tpinghost = true
 	print("TARGET IS CALLED: "..RTARGET.Name)
 	if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") then
 		local cc = game.Players.LocalPlayer.Backpack:FindFirstChild("Combat")
@@ -358,6 +360,7 @@ function tphost(target, acc)
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 				targetname = nil
 				botname = nil
+				tpinghost = false
 			else
 				player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
 				print("OOGGAAA")
@@ -885,11 +888,21 @@ function autosaves()
 
     local rooftop = CFrame.new(-311.527832, 80.4060745, -210.709579, 0.128545299, 3.6054022e-08, -0.991703629, 5.96125744e-08, 1, 4.40826646e-08, 0.991703629, -6.47846221e-08, 0.128545299)
     humanoid.HealthChanged:Connect(function()
-        if autosave == true then
+        if autosave == true and tpinghost == false then
             if host.Character.Humanoid.Health <= 4 then
                 local player = Players.LocalPlayer
                 if player and player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-                    player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
+		           local targetPosition = RTARGET.Character.UpperTorso.CFrame.Position
+		        
+		        -- Set the player's UpperTorso to the target position but keep it upright
+		        local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
+		        
+		        -- Optionally, adjust the height to match the standing height
+		        local adjustedPosition = targetPosition + Vector3.new(0, player.Character.UpperTorso.Size.Y/2, 0)
+		        newCFrame = CFrame.new(adjustedPosition) * CFrame.Angles(0, 0, 0)
+		
+		        -- Set the player's UpperTorso to the new CFrame
+		        player.Character.UpperTorso.CFrame = newCFrame
                     wait(0.7)
                     local args = {
                         [1] = "Grabbing",
