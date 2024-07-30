@@ -892,27 +892,24 @@ function autosaves()
         if autosave == true and tpinghost == false then
             if host.Character.Humanoid.Health <= 4 then
                 local player = Players.LocalPlayer
+		player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
                 if player and player.Character and player.Character:FindFirstChild("UpperTorso") then
-                    print("SIGMA")
-				local targetCFrame = host.Character.UpperTorso.CFrame
-				local targetPosition = targetCFrame.Position
-
-       			 -- Create a new CFrame for the player's UpperTorso at the target position with an upright orientation
-        			local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
-				wait(0.4)
-				player.Character.UpperTorso.CFrame = newCFrame
-                    
                     wait(0.7)
-                    local args = {
-                        [1] = "Grabbing",
-                        [2] = false
-                    }
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
 
-                    game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
-                    player.Character.HumanoidRootPart.CFrame = rooftop
-                    wait(0.8)
-                    game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
+				player.Character.HumanoidRootPart.CFrame = rooftop
+				wait(0.7)
+				local args = {
+					[1] = "Grabbing",
+					[2] = false
+				}
+
+				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
                 else
                     warn("Player or Player's UpperTorso not found")
                 end
