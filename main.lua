@@ -231,7 +231,7 @@ function killnbring(target, acc)
         			local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
 				stopUpdating()
 				wait(0.4)
-				player.Character.UpperTorso.CFrame = newCFrame
+				player.Character.UpperTorso.CFrame = targetCFrame
 				
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
