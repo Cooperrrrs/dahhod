@@ -335,11 +335,13 @@ function tphost(target, acc)
 
 	while true do
 		if host.Character.Humanoid.Health <= 4 then
-			player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
+		
+			
 			player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
 			local distance = (host.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 			if distance <= 4 then
 				print("OOGGAAA")
+				task.wait(1)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -348,6 +350,7 @@ function tphost(target, acc)
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame  * CFrame.new(0, 0, 0)
+				task.wait(1)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
