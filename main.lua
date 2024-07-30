@@ -361,8 +361,8 @@ function tphost(target, acc)
 				botname = nil
 				tpinghost = false
 			else
-				player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
 				print("OOGGAAA")
+				task.wait(1)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -371,6 +371,7 @@ function tphost(target, acc)
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame  * CFrame.new(0, 0, 0)
+				task.wait(1)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -379,6 +380,7 @@ function tphost(target, acc)
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 				targetname = nil
 				botname = nil
+				tpinghost = false
 			end
 
 			break
