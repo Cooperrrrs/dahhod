@@ -230,12 +230,11 @@ function killnbring(target, acc)
        			 -- Create a new CFrame for the player's UpperTorso at the target position with an upright orientation
         			local newCFrame = CFrame.new(targetPosition) * CFrame.Angles(0, 0, 0)
 				stopUpdating()
-				wait(0.4)
 				player.Character.UpperTorso.CFrame = targetCFrame
 				
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -244,7 +243,7 @@ function killnbring(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -255,7 +254,7 @@ function killnbring(target, acc)
 					botname = nil
 				else
 					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -264,7 +263,7 @@ function killnbring(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -491,15 +490,10 @@ function tpo(plrtobring, plrtogoto, botgoing)
 				local cc = game.Players.LocalPlayer.Character:FindFirstChild("Combat")
 				cc.Parent = game.Players.LocalPlayer.Backpack
 				stopUpdating()
-				wait(0.4)
 				player.Character.HumanoidRootPart.CFrame = player.Character.UpperTorso.CFrame
-				wait(0.5)
-				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
-				wait(0.2)
-				player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
 				local distance = (host.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -508,7 +502,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -520,7 +514,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 					botgoing = nil
 				else
 					player.Character.HumanoidRootPart.CFrame = TPTARGET.Character.UpperTorso.CFrame
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -529,7 +523,7 @@ function tpo(plrtobring, plrtogoto, botgoing)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = BTARGET.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -788,15 +782,10 @@ function tpgun(target, acc)
 					v:Disconnect()
 				end
 				stopUpdating()
-				wait(0.4)
-				player.Character.HumanoidRootPart.CFrame = player.Character.Head.CFrame
-				wait(0.5)
-				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
-				wait(0.2)
 				player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
 				local distance = (RTARGET.Character.HumanoidRootPart.Position - player.Character.UpperTorso.Position).Magnitude
 				if distance <= 4 then
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -805,7 +794,7 @@ function tpgun(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -816,7 +805,7 @@ function tpgun(target, acc)
 					botname = nil
 				else
 					player.Character.HumanoidRootPart.CFrame = RTARGET.Character.UpperTorso.CFrame
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -825,7 +814,7 @@ function tpgun(target, acc)
 					game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 					player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame  * CFrame.new(0, 0, 0)
-					wait(0.7)
+					task.wait(1)
 					local args = {
 						[1] = "Grabbing",
 						[2] = false
@@ -893,7 +882,7 @@ function autosaves()
                 local player = Players.LocalPlayer
 		player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
                 if player and player.Character and player.Character:FindFirstChild("UpperTorso") then
-                    wait(0.7)
+                    task.wait(1)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
@@ -902,7 +891,7 @@ function autosaves()
 				game:GetService("ReplicatedStorage").MainEvent:FireServer(unpack(args))
 
 				player.Character.HumanoidRootPart.CFrame = rooftop
-				wait(0.7)
+				task.wait(1)
 				local args = {
 					[1] = "Grabbing",
 					[2] = false
