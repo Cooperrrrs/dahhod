@@ -892,7 +892,7 @@ function autosaves()
         if autosave == true and tpinghost == false then
             if host.Character.Humanoid.Health <= 4 then
                 local player = Players.LocalPlayer
-		player.Character.HumanoidRootPart.CFrame = host.Character.HumanoidRootPart.CFrame
+		player.Character.HumanoidRootPart.CFrame = host.Character.UpperTorso.CFrame
                 if player and player.Character and player.Character:FindFirstChild("UpperTorso") then
                     wait(0.7)
 				local args = {
